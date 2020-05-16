@@ -21,7 +21,7 @@ module V1
         @restaurant = current_user.restaurants.new(restaurant_params)
 
         if @restaurant.save
-          render json: @restaurant, status: :created, location: @restaurant
+          render json: @restaurant, status: :created, location: [:v1, :manager, @restaurant]
         else
           render json: @restaurant.errors, status: :unprocessable_entity
         end
@@ -49,7 +49,7 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def restaurant_params
-        params.fetch(:restaurant, {})
+        params.require(:restaurant).permit(:name, :opening_hour, :closing_hour, :is_open, :subdomain)
       end
 
       def check_if_owner
