@@ -245,6 +245,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.2)
   rspec-rails
   rubycritic
+  simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

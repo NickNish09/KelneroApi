@@ -32,6 +32,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem "rubycritic", require: false
+  gem 'simplecov', require: false
 end
 
 group :development do
