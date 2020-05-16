@@ -54,7 +54,7 @@ module V1
 
       def check_if_owner
         unless @restaurant.user == current_user
-          return_unauthorized
+          render json: { error: 'Apenas o dono do restaurante tem acesso à isso' }, status: :unauthorized
         end
       end
 
