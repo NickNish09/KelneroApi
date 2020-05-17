@@ -12,10 +12,9 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     namespace :manager do
-      resources :restaurants do
-        constraints SubdomainConstraint do
-          resources :items
-        end
+      resources :restaurants
+      constraints SubdomainConstraint do
+        resources :items
       end
     end
   end

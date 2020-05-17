@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/nicknish/Projects/KelneroApi/spec/models/item_spec.rb": {
+      "/Users/nicknish/Projects/KelneroApi/spec/models/category_spec.rb": {
         "lines": [
           1,
           null,
@@ -506,6 +506,26 @@
           null
         ]
       },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/categories.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/item_categories.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/nicknish/Projects/KelneroApi/spec/factories/items.rb": {
         "lines": [
           1,
@@ -524,6 +544,15 @@
           1,
           1,
           1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/tables.rb": {
+        "lines": [
           1,
           1,
           1,
@@ -554,7 +583,38 @@
           null,
           null,
           null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/models/category.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/models/item_category_spec.rb": {
+        "lines": [
+          1,
           null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/models/item_category.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
           null
         ]
       },
@@ -569,6 +629,21 @@
           1,
           null,
           1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/models/table_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/models/table.rb": {
+        "lines": [
           1,
           null
         ]
@@ -611,116 +686,6 @@
           null,
           null,
           1,
-          null,
-          null,
-          null,
-          1,
-          8,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          1,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          0,
-          null,
-          null,
-          1,
-          1,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          1,
-          1,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          0,
-          0,
-          null,
-          null,
           null,
           null
         ]
@@ -931,6 +896,6 @@
         ]
       }
     },
-    "timestamp": 1589740174
+    "timestamp": 1589743133
   }
 }
