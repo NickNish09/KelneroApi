@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :bill_item do
-    item { nil }
-    bill { nil }
+    item { create(:item) }
+    bill { create(:bill) }
     quantity { 1 }
-    details { "MyText" }
+    details { "Sem feijão" }
   end
 end

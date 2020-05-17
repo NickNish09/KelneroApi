@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :bill do
-    final_bill { 1.5 }
-    table { nil }
-    user { nil }
+    final_bill { 19.80 }
+    table { create(:table) }
+    user { create(:user) }
   end
 end

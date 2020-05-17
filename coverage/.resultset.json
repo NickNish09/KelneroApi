@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/nicknish/Projects/KelneroApi/spec/models/category_spec.rb": {
+      "/Users/nicknish/Projects/KelneroApi/spec/models/bill_item_spec.rb": {
         "lines": [
           1,
           null,
@@ -47,7 +47,7 @@
           1,
           null,
           1,
-          null,
+          1,
           null,
           null,
           null,
@@ -506,6 +506,29 @@
           null
         ]
       },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/bill_items.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/bills.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/nicknish/Projects/KelneroApi/spec/factories/categories.rb": {
         "lines": [
           1,
@@ -560,6 +583,23 @@
           null
         ]
       },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/users.rb": {
+        "lines": [
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/nicknish/Projects/KelneroApi/config/routes.rb": {
         "lines": [
           1,
@@ -583,6 +623,43 @@
           null,
           null,
           null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/models/bill_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/models/bill_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/models/bill.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/models/category_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
           null
         ]
       },
@@ -900,6 +977,6 @@
         ]
       }
     },
-    "timestamp": 1589743871
+    "timestamp": 1589745928
   }
 }

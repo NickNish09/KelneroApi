@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do
-    name { "MyString" }
-    price { 1.5 }
-    available { false }
-    quantity { 1 }
+    name { "Litrão Skol" }
+    price { 9.9 }
+    available { true }
+    quantity { 10 }
   end
 end
