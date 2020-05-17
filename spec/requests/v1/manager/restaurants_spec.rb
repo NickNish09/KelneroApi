@@ -14,7 +14,7 @@ require 'rails_helper'
 
 RSpec.describe "/v1/manager/restaurants", type: :request do
   # This should return the minimal set of attributes required to create a valid
-  # V1::Manager::Restaurant. As you add validations to V1::Manager::Restaurant, be sure to
+  # Restaurant. As you add validations to Restaurant, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -26,7 +26,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # V1::Manager::RestaurantsController, or in your router and rack
+  # RestaurantsController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
     {}
@@ -34,7 +34,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      V1::Manager::Restaurant.create! valid_attributes
+      Restaurant.create! valid_attributes
       get v1_manager_restaurants_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end
@@ -42,7 +42,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      restaurant = V1::Manager::Restaurant.create! valid_attributes
+      restaurant = Restaurant.create! valid_attributes
       get v1_manager_restaurant_url(v1_manager_restaurant), as: :json
       expect(response).to be_successful
     end
@@ -50,32 +50,32 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new V1::Manager::Restaurant" do
+      it "creates a new Restaurant" do
         expect {
           post v1_manager_restaurants_url,
-               params: { v1/manager_restaurant: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(V1::Manager::Restaurant, :count).by(1)
+               params: { restaurant: valid_attributes }, headers: valid_headers, as: :json
+        }.to change(Restaurant, :count).by(1)
       end
 
-      it "renders a JSON response with the new v1/manager_restaurant" do
+      it "renders a JSON response with the new restaurant" do
         post v1_manager_restaurants_url,
-             params: { v1/manager_restaurant: valid_attributes }, headers: valid_headers, as: :json
+             params: { restaurant: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new V1::Manager::Restaurant" do
+      it "does not create a new Restaurant" do
         expect {
           post v1_manager_restaurants_url,
-               params: { v1/manager_restaurant: invalid_attributes }, as: :json
-        }.to change(V1::Manager::Restaurant, :count).by(0)
+               params: { restaurant: invalid_attributes }, as: :json
+        }.to change(Restaurant, :count).by(0)
       end
 
-      it "renders a JSON response with errors for the new v1/manager_restaurant" do
+      it "renders a JSON response with errors for the new restaurant" do
         post v1_manager_restaurants_url,
-             params: { v1/manager_restaurant: invalid_attributes }, headers: valid_headers, as: :json
+             params: { restaurant: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
       end
@@ -88,16 +88,16 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested v1/manager_restaurant" do
-        restaurant = V1::Manager::Restaurant.create! valid_attributes
+      it "updates the requested restaurant" do
+        restaurant = Restaurant.create! valid_attributes
         patch v1_manager_restaurant_url(v1_manager_restaurant),
               params: { v1_manager_restaurant: invalid_attributes }, headers: valid_headers, as: :json
         restaurant.reload
         skip("Add assertions for updated state")
       end
 
-      it "renders a JSON response with the v1/manager_restaurant" do
-        restaurant = V1::Manager::Restaurant.create! valid_attributes
+      it "renders a JSON response with the restaurant" do
+        restaurant = Restaurant.create! valid_attributes
         patch v1_manager_restaurant_url(v1_manager_restaurant),
               params: { v1_manager_restaurant: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
@@ -106,8 +106,8 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a JSON response with errors for the v1/manager_restaurant" do
-        restaurant = V1::Manager::Restaurant.create! valid_attributes
+      it "renders a JSON response with errors for the restaurant" do
+        restaurant = Restaurant.create! valid_attributes
         patch v1_manager_restaurant_url(v1_manager_restaurant),
               params: { v1_manager_restaurant: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
@@ -117,11 +117,11 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested v1/manager_restaurant" do
-      restaurant = V1::Manager::Restaurant.create! valid_attributes
+    it "destroys the requested restaurant" do
+      restaurant = Restaurant.create! valid_attributes
       expect {
         delete v1_manager_restaurant_url(v1_manager_restaurant), headers: valid_headers, as: :json
-      }.to change(V1::Manager::Restaurant, :count).by(-1)
+      }.to change(Restaurant, :count).by(-1)
     end
   end
 end
