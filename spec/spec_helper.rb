@@ -46,7 +46,32 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-# The settings below are suggested to provide a good initial experience
+  config.before(:suite) do
+    # Clean all tables to start
+    DatabaseCleaner.clean_with :truncation
+    # Use transactions for tests
+    DatabaseCleaner.strategy = :transaction
+    # Truncating doesn't drop schemas, ensure we're clean here, app *may not* exist
+    Apartment::Tenant.drop('app') rescue nil
+    # Create the default tenant for our tests
+    Restaurant.create!(name: 'Taioba', subdomain: 'app', user: User.create(email: 'taioba@admin.com', password: '123456', name: 'Taioba'))
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+    # Switch into the default tenant
+    Apartment::Tenant.switch! 'app'
+    # host! 'app.lvm.me:3000'
+  end
+
+  config.after(:each) do
+    # Reset tentant back to `public`
+    Apartment::Tenant.reset
+    # Rollback transaction
+    DatabaseCleaner.clean
+  end
+
+  # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
   # This allows you to limit a spec run to individual examples or groups

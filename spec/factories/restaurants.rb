@@ -5,5 +5,6 @@ FactoryBot.define do
     closing_hour { "16:30" }
     is_open { true }
     subdomain { "taioba" }
+    user { create(:user) }
   end
 end

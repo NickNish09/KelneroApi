@@ -12,6 +12,24 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/v1/manager/restaurants/items", type: :request do
+RSpec.describe "V1::Manager::Items", type: :request do
+  MENU_ITEMS_SIZE = 5
 
+  describe "GET #index" do
+    before() do
+      MENU_ITEMS_SIZE.times do |i|
+        create(:item_with_category, price: 5.99 + i, name: "Produto #{i+1}")
+      end
+
+      get "http://app.example.com/v1/manager/items"
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should return all the menu itens' do
+      expect(JSON.parse(response.body).size).to eq(MENU_ITEMS_SIZE)
+    end
+  end
 end
