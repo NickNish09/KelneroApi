@@ -27,6 +27,9 @@ gem 'rack-cors'
 # Devise Auth Token pra autenticação
 gem 'devise_token_auth'
 
+# Gerenciamento de multi-tenancy
+gem 'ros-apartment', require: 'apartment'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
