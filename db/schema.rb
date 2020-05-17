@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_191648) do
+ActiveRecord::Schema.define(version: 2020_05_17_194848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bill_items", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "bill_id", null: false
+    t.integer "quantity"
+    t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bill_id"], name: "index_bill_items_on_bill_id"
+    t.index ["item_id"], name: "index_bill_items_on_item_id"
+  end
+
+  create_table "bills", force: :cascade do |t|
+    t.float "final_bill"
+    t.bigint "table_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["table_id"], name: "index_bills_on_table_id"
+    t.index ["user_id"], name: "index_bills_on_user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -88,6 +109,10 @@ ActiveRecord::Schema.define(version: 2020_05_17_191648) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "bill_items", "bills"
+  add_foreign_key "bill_items", "items"
+  add_foreign_key "bills", "tables"
+  add_foreign_key "bills", "users"
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
   add_foreign_key "restaurants", "users"

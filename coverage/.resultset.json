@@ -589,6 +589,8 @@
       "/Users/nicknish/Projects/KelneroApi/app/models/category.rb": {
         "lines": [
           1,
+          1,
+          1,
           null
         ]
       },
@@ -620,6 +622,8 @@
       },
       "/Users/nicknish/Projects/KelneroApi/app/models/item.rb": {
         "lines": [
+          1,
+          1,
           1,
           null
         ]
@@ -896,6 +900,6 @@
         ]
       }
     },
-    "timestamp": 1589743133
+    "timestamp": 1589743871
   }
 }
