@@ -33,34 +33,45 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         expect(JSON.parse(response.body).size).to eq(RESTAURANTS_SIZE)
       end
     end
+  end
+
+  describe "GET #show" do
+    context "with permissions" do
+      before() do
+        @user = create(:user)
+        @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
+
+        headers = @user.create_new_auth_token if sign_in(@user)
+        get "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return the user restaurant' do
+        expect(JSON.parse(response.body)['id']).to eq(@restaurant.id)
+        expect(JSON.parse(response.body)['name']).to eq("Restaurante")
+      end
+    end
 
     context "without permissions" do
       before() do
         @user = create(:user)
-        @user_without_permissions = create(:user)
-        RESTAURANTS_SIZE.times do |i|
-          @restaurant = create(:restaurant, user: @user, name: "Restaurante #{i+1}", subdomain: "restaurante_#{i+1}")
-        end
-        headers = @user_without_permissions.create_new_auth_token if sign_in(@user)
-        get "http://app.example.com/v1/manager/restaurants", params: {}, headers: headers
+        @user_without_permission = create(:user)
+        @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
+
+        headers = @user_without_permission.create_new_auth_token if sign_in(@user)
+        get "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
       end
-    end
-  end
 
-  describe "GET #show" do
-    before() do
-      @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
 
-      get "http://app.example.com/v1/manager/items/#{@item.id}"
-    end
-
-    it 'returns status code 200' do
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'should return the menu item requeted' do
-      expect(JSON.parse(response.body)['id']).to eq(@item.id)
-      expect(JSON.parse(response.body)['name']).to eq(@item.name)
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq('Apenas o dono do restaurante tem acesso à isso')
+      end
     end
   end
 
