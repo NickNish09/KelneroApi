@@ -2,7 +2,6 @@ module V1
   module Manager
     class ItemsController < ManagerController
       before_action :set_item, only: [:show, :update, :destroy]
-      before_action :set_restaurant, only: [:show, :create, :update, :destroy]
 
       # GET /v1/manager/restaurants/items
       def index
@@ -20,7 +19,7 @@ module V1
         @item = Item.new(item_params)
 
         if @item.save
-          render json: @item, status: :created, location: v1_manager_restaurant_item_url(@restaurant, @item)
+          render json: @item, status: :created, location: v1_manager_item_url(@item)
         else
           render json: @item.errors, status: :unprocessable_entity
         end
@@ -44,10 +43,6 @@ module V1
       # Use callbacks to share common setup or constraints between actions.
       def set_item
         @item = Item.find(params[:id])
-      end
-
-      def set_restaurant
-        @restaurant = Restaurant.find(params[:restaurant_id])
       end
 
       # Only allow a trusted parameter "white list" through.

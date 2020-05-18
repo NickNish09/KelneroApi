@@ -32,4 +32,42 @@ RSpec.describe "V1::Manager::Items", type: :request do
       expect(JSON.parse(response.body).size).to eq(MENU_ITEMS_SIZE)
     end
   end
+
+  describe "GET #show" do
+    before() do
+      @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
+
+      get "http://app.example.com/v1/manager/items/#{@item.id}"
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should return the menu item requeted' do
+      expect(JSON.parse(response.body)['id']).to eq(@item.id)
+      expect(JSON.parse(response.body)['name']).to eq(@item.name)
+    end
+  end
+
+  describe "GET #create" do
+    before() do
+      item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
+      @item_count = Item.count
+      post "http://app.example.com/v1/manager/items/", params: item_params
+    end
+
+    it 'returns status code created' do
+      expect(response).to have_http_status(:created)
+    end
+
+    it 'should return the menu item created' do
+      expect(JSON.parse(response.body)['name']).to eq('Cerveja 600ml')
+      expect(JSON.parse(response.body)['price']).to eq(5.90)
+    end
+
+    it 'should create an item in the DB' do
+      expect(Item.count).to eq @item_count + 1
+    end
+  end
 end
