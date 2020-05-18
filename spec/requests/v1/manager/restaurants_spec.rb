@@ -61,7 +61,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         @user_without_permission = create(:user)
         @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
 
-        headers = @user_without_permission.create_new_auth_token if sign_in(@user)
+        headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
         get "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
       end
 
@@ -78,9 +78,16 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
   describe "POST #create" do
     context "with valid params" do
       before() do
-        item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
-        @item_count = Item.count
-        post "http://app.example.com/v1/manager/items/", params: item_params
+        @user = create(:user)
+        restaurants_params = {restaurant: {name: "Restaurante",
+                                    opening_hour: "9:00",
+                                    closing_hour: "23:00",
+                                    is_open: true,
+                                    user: @user,
+                                    subdomain: "restaurante"}}
+        @restaurant_count = @user.restaurants.count
+        headers = @user.create_new_auth_token if sign_in(@user)
+        post "http://app.example.com/v1/manager/restaurants/", params: restaurants_params, headers: headers
       end
 
       it 'returns status code created' do
@@ -88,20 +95,26 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
       end
 
       it 'should return the menu item created' do
-        expect(JSON.parse(response.body)['name']).to eq('Cerveja 600ml')
-        expect(JSON.parse(response.body)['price']).to eq(5.90)
+        expect(JSON.parse(response.body)['name']).to eq('Restaurante')
       end
 
       it 'should create an item in the DB' do
-        expect(Item.count).to eq @item_count + 1
+        expect(@user.restaurants.count).to eq @restaurant_count + 1
       end
     end
 
     context "with invalid params" do
       before() do
-        item_params = {item: {name: nil, price: 5.90, available: true, quantity: 10}}
-        @item_count = Item.count
-        post "http://app.example.com/v1/manager/items/", params: item_params
+        @user = create(:user)
+        restaurants_params = {restaurant: {name: "",
+                                           opening_hour: "9:00",
+                                           closing_hour: "23:00",
+                                           is_open: true,
+                                           user: @user,
+                                           subdomain: "restaurante"}}
+        @restaurant_count = @user.restaurants.count
+        headers = @user.create_new_auth_token if sign_in(@user)
+        post "http://app.example.com/v1/manager/restaurants/", params: restaurants_params, headers: headers
       end
 
       it 'returns status code unprocessable_entity' do
@@ -113,67 +126,125 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
       end
 
       it 'should not create an item in the DB' do
-        expect(Item.count).to eq @item_count
+        expect(@user.restaurants.count).to eq @restaurant_count
       end
     end
   end
 
   describe "PUT #update" do
+    context "with authorized user" do
+      context "with valid params" do
+        before() do
+          @user = create(:user)
+          @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
+          restaurants_params = {restaurant: {name: "Restaurante Modificado",
+                                             opening_hour: "9:00",
+                                             closing_hour: "23:00",
+                                             is_open: true,
+                                             subdomain: "restaurante"}}
+          headers = @user.create_new_auth_token if sign_in(@user)
+          put "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: restaurants_params, headers: headers
+        end
 
-    context "with valid params" do
-      before() do
-        @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
-        item_params = {item: {name: "Cerveja 300ml", price: 4.90, available: true, quantity: 9}}
-        put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params
+        it 'returns status code updated' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'should update the restaurant and show it' do
+          expect(JSON.parse(response.body)['name']).to eq('Restaurante Modificado')
+        end
       end
 
-      it 'returns status code updated' do
-        expect(response).to have_http_status(200)
-      end
+      context "with invalid params" do
+        before() do
+          @user = create(:user)
+          @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
+          restaurants_params = {restaurant: {name: "",
+                                             opening_hour: "9:00",
+                                             closing_hour: "23:00",
+                                             is_open: true,
+                                             subdomain: "restaurante"}}
+          headers = @user.create_new_auth_token if sign_in(@user)
+          @restaurant_count = @user.restaurants.count
+          put "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: restaurants_params, headers: headers
+        end
 
-      it 'should update the menu item and show it' do
-        expect(JSON.parse(response.body)['name']).to eq('Cerveja 300ml')
-        expect(JSON.parse(response.body)['price']).to eq(4.90)
+        it 'returns status code unprocessable_entity' do
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'should return an error message' do
+          expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
+        end
+
+        it 'should not create an item in the DB' do
+          expect(@user.restaurants.count).to eq @restaurant_count
+        end
+
       end
     end
 
-    context "with invalid params" do
+    context "with unauthorized user" do
       before() do
-        @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
-        item_params = {item: {name: nil, price: 4.80, available: true, quantity: 9}}
-        @item_count = Item.count
-        put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params
+        @user = create(:user)
+        @user_without_permission = create(:user)
+        @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
+        restaurants_params = {restaurant: {name: "Vou trolar seu restaurante",
+                                           opening_hour: "9:00",
+                                           closing_hour: "23:00",
+                                           is_open: true,
+                                           subdomain: "restaurante"}}
+        headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
+        put "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: restaurants_params, headers: headers
       end
 
-      it 'returns status code unprocessable_entity' do
-        expect(response).to have_http_status(:unprocessable_entity)
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
       end
 
       it 'should return an error message' do
-        expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
-      end
-
-      it 'should not create an item in the DB' do
-        expect(Item.count).to eq @item_count
+        expect(JSON.parse(response.body)['error']).to eq('Apenas o dono do restaurante tem acesso à isso')
       end
 
     end
   end
 
   describe "DELETE #destroy" do
-    before() do
-      @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
-      @item_2 = create(:item_with_category, price: 6.99, name: "Litrão Antartica")
-      @item_count = Item.count
-      delete "http://app.example.com/v1/manager/items/#{@item.id}"
+    context "with user authorized" do
+      before() do
+        @user = create(:user)
+        @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
+        @restaurant_count = @user.restaurants.count
+        headers = @user.create_new_auth_token if sign_in(@user)
+        delete "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code deleted' do
+        expect(response).to have_http_status(204)
+      end
+
+      it 'should delete the item' do
+        expect(@user.restaurants.count).to eq @restaurant_count - 1
+      end
     end
 
-    it 'returns status code deleted' do
-      expect(response).to have_http_status(204)
-    end
+    context "with user unauthorized" do
+      before() do
+        @user = create(:user)
+        @user_without_permission = create(:user)
+        @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
+        @restaurant_count = @user.restaurants.count
+        headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
+        delete "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
+      end
 
-    it 'should delete the item' do
-      expect(Item.count).to eq @item_count - 1
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should not delete the item' do
+        expect(@user.restaurants.count).to eq @restaurant_count
+      end
     end
 
   end

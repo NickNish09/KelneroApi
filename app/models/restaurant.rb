@@ -3,6 +3,7 @@ class Restaurant < ApplicationRecord
   after_create :create_tenant
 
   validates :name, presence: true, uniqueness: true
+  validates :subdomain, presence: true, uniqueness: true
 
   def create_tenant
     Apartment::Tenant.create(subdomain)
