@@ -51,23 +51,45 @@ RSpec.describe "V1::Manager::Items", type: :request do
   end
 
   describe "POST #create" do
-    before() do
-      item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
-      @item_count = Item.count
-      post "http://app.example.com/v1/manager/items/", params: item_params
+    context "with valid params" do
+      before() do
+        item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
+        @item_count = Item.count
+        post "http://app.example.com/v1/manager/items/", params: item_params
+      end
+
+      it 'returns status code created' do
+        expect(response).to have_http_status(:created)
+      end
+
+      it 'should return the menu item created' do
+        expect(JSON.parse(response.body)['name']).to eq('Cerveja 600ml')
+        expect(JSON.parse(response.body)['price']).to eq(5.90)
+      end
+
+      it 'should create an item in the DB' do
+        expect(Item.count).to eq @item_count + 1
+      end
     end
 
-    it 'returns status code created' do
-      expect(response).to have_http_status(:created)
-    end
+    context "with invalid params" do
+      before() do
+        item_params = {item: {name: nil, price: 5.90, available: true, quantity: 10}}
+        @item_count = Item.count
+        post "http://app.example.com/v1/manager/items/", params: item_params
+      end
 
-    it 'should return the menu item created' do
-      expect(JSON.parse(response.body)['name']).to eq('Cerveja 600ml')
-      expect(JSON.parse(response.body)['price']).to eq(5.90)
-    end
+      it 'returns status code unprocessable_entity' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
 
-    it 'should create an item in the DB' do
-      expect(Item.count).to eq @item_count + 1
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
+      end
+
+      it 'should not create an item in the DB' do
+        expect(Item.count).to eq @item_count
+      end
     end
   end
 

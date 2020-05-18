@@ -24,6 +24,9 @@ module KelneroApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    config.i18n.default_locale = :'pt-BR'
+    config.time_zone = "Brasilia"
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
