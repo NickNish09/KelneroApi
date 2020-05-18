@@ -50,7 +50,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
     end
   end
 
-  describe "GET #create" do
+  describe "POST #create" do
     before() do
       item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
       @item_count = Item.count
@@ -70,4 +70,41 @@ RSpec.describe "V1::Manager::Items", type: :request do
       expect(Item.count).to eq @item_count + 1
     end
   end
+
+  describe "PUT #update" do
+    before() do
+      @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
+      item_params = {item: {name: "Cerveja 300ml", price: 4.90, available: true, quantity: 9}}
+      put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params
+    end
+
+    it 'returns status code updated' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should update the menu item and show it' do
+      expect(JSON.parse(response.body)['name']).to eq('Cerveja 300ml')
+      expect(JSON.parse(response.body)['price']).to eq(4.90)
+    end
+
+  end
+
+  describe "DELETE #destroy" do
+    before() do
+      @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
+      @item_2 = create(:item_with_category, price: 6.99, name: "Litrão Antartica")
+      @item_count = Item.count
+      delete "http://app.example.com/v1/manager/items/#{@item.id}"
+    end
+
+    it 'returns status code deleted' do
+      expect(response).to have_http_status(204)
+    end
+
+    it 'should delete the item' do
+      expect(Item.count).to eq @item_count - 1
+    end
+
+  end
+
 end
