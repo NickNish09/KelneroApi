@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       constraints SubdomainConstraint do
         resources :items
         resources :tables
+        resources :bills
       end
     end
   end

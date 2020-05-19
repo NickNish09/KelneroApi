@@ -4,4 +4,6 @@ class Bill < ApplicationRecord
 
   has_many :bill_items
   has_many :items, through: :bill_items
+
+  validates :final_bill, presence: true
 end

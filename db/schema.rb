@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_194848) do
+ActiveRecord::Schema.define(version: 2020_05_19_203040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 2020_05_17_194848) do
   add_foreign_key "bill_items", "bills"
   add_foreign_key "bill_items", "items"
   add_foreign_key "bills", "tables"
-  add_foreign_key "bills", "users"
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
   add_foreign_key "restaurants", "users"
