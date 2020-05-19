@@ -14,7 +14,7 @@
       <img src="./assets/0.12.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2020-05-18T21:39:26-03:00">2020-05-18T21:39:26-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2020-05-18T22:10:28-03:00">2020-05-18T22:10:28-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  97.42%
+  97.37%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.98
+         2.0
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>621</b> relevant lines,
-    <span class="green"><b>605</b> lines covered</span> and
+    <b>608</b> relevant lines,
+    <span class="green"><b>592</b> lines covered</span> and
     <span class="red"><b>16</b> lines missed. </span>
     (<span class="green">
-  97.42%
+  97.37%
 </span>
 )
   </div>
@@ -577,7 +577,7 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#49880b7b7181ca3ee2c84cefb52a776a803ceeb3" class="src_link" title="spec/requests/v1/manager/restaurants/items_spec.rb">spec/requests/v1/manager/restaurants/items_spec.rb</a></td>
+            <td class="strong t-file__name"><a href="#58a88a2e645ea44417fd7f9938064bff2db1eea8" class="src_link" title="spec/requests/v1/manager/items_spec.rb">spec/requests/v1/manager/items_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">176</td>
             <td class="cell--number">92</td>
@@ -646,8 +646,8 @@
             <td class="strong t-file__name"><a href="#7f9092fa534fb3e1e8ebab965420dbafa5c85ad0" class="src_link" title="spec/routing/v1/manager/tables_routing_spec.rb">spec/routing/v1/manager/tables_routing_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">30</td>
-            <td class="cell--number">15</td>
-            <td class="cell--number">15</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">2</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -2433,7 +2433,7 @@
 
             
 
-            <code class="ruby">          render json: @table, status: :created, location: @table</code>
+            <code class="ruby">          render json: @table, status: :created, location: [:v1, :manager, @table]</code>
           </li>
         </div>
       
@@ -8215,7 +8215,7 @@
 
             
 
-            <code class="ruby">      resources :tables</code>
+            <code class="ruby">      constraints SubdomainConstraint do</code>
           </li>
         </div>
       
@@ -8226,7 +8226,7 @@
 
             
 
-            <code class="ruby">      constraints SubdomainConstraint do</code>
+            <code class="ruby">        resources :items</code>
           </li>
         </div>
       
@@ -8237,7 +8237,7 @@
 
             
 
-            <code class="ruby">        resources :items</code>
+            <code class="ruby">        resources :tables</code>
           </li>
         </div>
       
@@ -11996,9 +11996,9 @@
 </div>
 
       
-        <div class="source_table" id="49880b7b7181ca3ee2c84cefb52a776a803ceeb3">
+        <div class="source_table" id="58a88a2e645ea44417fd7f9938064bff2db1eea8">
   <div class="header">
-    <h3>spec/requests/v1/manager/restaurants/items_spec.rb</h3>
+    <h3>spec/requests/v1/manager/items_spec.rb</h3>
     <h4>
       <span class="green">
   100.0%
@@ -17619,8 +17619,8 @@
     
 
     <div class="t-line-summary">
-      <b>15</b> relevant lines.
-      <span class="green"><b>15</b> lines covered</span> and
+      <b>2</b> relevant lines.
+      <span class="green"><b>2</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -17665,35 +17665,35 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="4">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="4">
+            
             
 
             
 
-            <code class="ruby">  describe &quot;routing&quot; do</code>
+            <code class="ruby">  # describe &quot;routing&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="5">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="5">
+            
             
 
             
 
-            <code class="ruby">    it &quot;routes to #index&quot; do</code>
+            <code class="ruby">  #   it &quot;routes to #index&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="6">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="6">
+            
             
 
             
 
-            <code class="ruby">      expect(get: &quot;/v1/manager/tables&quot;).to route_to(&quot;v1/manager/tables#index&quot;)</code>
+            <code class="ruby">  #     expect(get: &quot;/v1/manager/tables&quot;).to route_to(&quot;v1/manager/tables#index&quot;)</code>
           </li>
         </div>
       
@@ -17704,7 +17704,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -17715,29 +17715,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="9">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="9">
+            
             
 
             
 
-            <code class="ruby">    it &quot;routes to #show&quot; do</code>
+            <code class="ruby">  #   it &quot;routes to #show&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="10">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="10">
+            
             
 
             
 
-            <code class="ruby">      expect(get: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#show&quot;, id: &quot;1&quot;)</code>
+            <code class="ruby">  #     expect(get: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#show&quot;, id: &quot;1&quot;)</code>
           </li>
         </div>
       
@@ -17748,7 +17748,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -17759,7 +17759,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
@@ -17770,29 +17770,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="14">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="14">
+            
             
 
             
 
-            <code class="ruby">    it &quot;routes to #create&quot; do</code>
+            <code class="ruby">  #   it &quot;routes to #create&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="15">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="15">
+            
             
 
             
 
-            <code class="ruby">      expect(post: &quot;/v1/manager/tables&quot;).to route_to(&quot;v1/manager/tables#create&quot;)</code>
+            <code class="ruby">  #     expect(post: &quot;/v1/manager/tables&quot;).to route_to(&quot;v1/manager/tables#create&quot;)</code>
           </li>
         </div>
       
@@ -17803,7 +17803,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -17814,29 +17814,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="18">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="18">
+            
             
 
             
 
-            <code class="ruby">    it &quot;routes to #update via PUT&quot; do</code>
+            <code class="ruby">  #   it &quot;routes to #update via PUT&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="19">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="19">
+            
             
 
             
 
-            <code class="ruby">      expect(put: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#update&quot;, id: &quot;1&quot;)</code>
+            <code class="ruby">  #     expect(put: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#update&quot;, id: &quot;1&quot;)</code>
           </li>
         </div>
       
@@ -17847,7 +17847,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -17858,29 +17858,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="22">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="22">
+            
             
 
             
 
-            <code class="ruby">    it &quot;routes to #update via PATCH&quot; do</code>
+            <code class="ruby">  #   it &quot;routes to #update via PATCH&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="23">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="23">
+            
             
 
             
 
-            <code class="ruby">      expect(patch: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#update&quot;, id: &quot;1&quot;)</code>
+            <code class="ruby">  #     expect(patch: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#update&quot;, id: &quot;1&quot;)</code>
           </li>
         </div>
       
@@ -17891,7 +17891,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -17902,29 +17902,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="26">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="26">
+            
             
 
             
 
-            <code class="ruby">    it &quot;routes to #destroy&quot; do</code>
+            <code class="ruby">  #   it &quot;routes to #destroy&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="27">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="27">
+            
             
 
             
 
-            <code class="ruby">      expect(delete: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#destroy&quot;, id: &quot;1&quot;)</code>
+            <code class="ruby">  #     expect(delete: &quot;/v1/manager/tables/1&quot;).to route_to(&quot;v1/manager/tables#destroy&quot;, id: &quot;1&quot;)</code>
           </li>
         </div>
       
@@ -17935,7 +17935,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -17946,7 +17946,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       

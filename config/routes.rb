@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   namespace :v1 do
     namespace :manager do
       resources :restaurants
-      resources :tables
       constraints SubdomainConstraint do
         resources :items
+        resources :tables
       end
     end
   end

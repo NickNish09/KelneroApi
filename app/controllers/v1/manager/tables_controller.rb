@@ -20,7 +20,7 @@ module V1
         @table = Table.new(table_params)
 
         if @table.save
-          render json: @table, status: :created, location: @table
+          render json: @table, status: :created, location: [:v1, :manager, @table]
         else
           render json: @table.errors, status: :unprocessable_entity
         end
