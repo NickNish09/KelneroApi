@@ -1,6 +1,6 @@
 module V1
   module Manager
-    class TablesController < ApplicationController
+    class TablesController < ManagerController
       before_action :set_table, only: [:show, :update, :destroy]
 
       # GET /v1/manager/tables
