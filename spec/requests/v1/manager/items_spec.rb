@@ -58,7 +58,8 @@ RSpec.describe "V1::Manager::Items", type: :request do
   describe "POST #create" do
     context "with valid params" do
       before() do
-        item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
+        @category = create(:category)
+        item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10, category_ids: [@category.id]}}
         @item_count = Item.count
 
         @user_app = User.find_by(email: "app@admin.com")
@@ -73,6 +74,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
       it 'should return the menu item created' do
         expect(JSON.parse(response.body)['name']).to eq('Cerveja 600ml')
         expect(JSON.parse(response.body)['price']).to eq(5.90)
+      end
+
+      it 'should create the association with the category' do
+        expect(JSON.parse(response.body)['categories'][0]['name']).to eq ('Principais')
       end
 
       it 'should create an item in the DB' do
