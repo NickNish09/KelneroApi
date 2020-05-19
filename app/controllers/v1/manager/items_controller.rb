@@ -47,7 +47,7 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def item_params
-        params.require(:item).permit(:name, :price, :available, :quantity)
+        params.require(:item).permit(:name, :price, :available, :quantity, category_ids: [])
       end
     end
 
