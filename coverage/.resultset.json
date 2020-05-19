@@ -630,6 +630,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           null,
@@ -1178,6 +1179,27 @@
           null
         ]
       },
+      "/Users/nicknish/Projects/KelneroApi/spec/requests/v1/manager/tables_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/nicknish/Projects/KelneroApi/spec/requests/v1/manager_request_spec.rb": {
         "lines": [
           1,
@@ -1397,6 +1419,100 @@
           null
         ]
       },
+      "/Users/nicknish/Projects/KelneroApi/spec/routing/v1/manager/tables_routing_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/controllers/v1/manager/tables_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/nicknish/Projects/KelneroApi/db/schema.rb": {
         "lines": [
           null,
@@ -1521,6 +1637,6 @@
         ]
       }
     },
-    "timestamp": 1589847789
+    "timestamp": 1589848766
   }
 }
