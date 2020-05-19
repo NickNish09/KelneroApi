@@ -192,10 +192,9 @@ RSpec.describe "/v1/manager/bills", type: :request do
   describe "DELETE #destroy" do
     context "with user authorized" do
       before do
-        @user = create(:user)
-        @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
-        @restaurant_count = @user.restaurants.count
-        delete "http://app.example.com/v1/manager/bills/#{@restaurant.id}", params: {}, headers: valid_headers
+        @bill = create(:bill)
+        @bills_count = Bill.count
+        delete "http://app.example.com/v1/manager/bills/#{@bill.id}", params: {}, headers: valid_headers
       end
 
       it 'returns status code deleted' do
@@ -203,17 +202,15 @@ RSpec.describe "/v1/manager/bills", type: :request do
       end
 
       it 'should delete the item' do
-        expect(@user.restaurants.count).to eq @restaurant_count - 1
+        expect(Bill.count).to eq @bills_count - 1
       end
     end
 
     context "with user unauthorized" do
       before do
-        @user = create(:user)
-        @user_without_permission = create(:user)
-        @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
-        @restaurant_count = @user.restaurants.count
-        delete "http://app.example.com/v1/manager/bills/#{@restaurant.id}", params: {}, headers: valid_headers
+        @bill = create(:bill)
+        @bills_count = Bill.count
+        delete "http://app.example.com/v1/manager/bills/#{@bill.id}", params: {}, headers: unauthorized_headers
       end
 
       it 'returns status code unauthorized' do
@@ -221,7 +218,7 @@ RSpec.describe "/v1/manager/bills", type: :request do
       end
 
       it 'should not delete the item' do
-        expect(@user.restaurants.count).to eq @restaurant_count
+        expect(Bill.count).to eq @bills_count
       end
     end
 
