@@ -484,6 +484,7 @@
           1,
           null,
           1,
+          1,
           null
         ]
       },
@@ -740,6 +741,8 @@
       },
       "/Users/nicknish/Projects/KelneroApi/app/models/table.rb": {
         "lines": [
+          1,
+          1,
           1,
           1,
           null
@@ -1743,6 +1746,6 @@
         ]
       }
     },
-    "timestamp": 1589867974
+    "timestamp": 1589905178
   }
 }
