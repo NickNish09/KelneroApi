@@ -54,7 +54,8 @@ RSpec.configure do |config|
     # Truncating doesn't drop schemas, ensure we're clean here, app *may not* exist
     Apartment::Tenant.drop('app') rescue nil
     # Create the default tenant for our tests
-    Restaurant.create!(name: 'Taioba', subdomain: 'app', user: User.create(email: 'taioba@admin.com', password: '123456', name: 'Taioba'))
+    @user_app = User.create(email: 'app@admin.com', password: '123456', name: 'App')
+    Restaurant.create!(name: 'App', subdomain: 'app', user: @user_app)
   end
 
   config.before(:each) do

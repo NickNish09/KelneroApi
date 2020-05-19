@@ -21,7 +21,9 @@ RSpec.describe "V1::Manager::Items", type: :request do
         create(:item_with_category, price: 5.99 + i, name: "Produto #{i+1}")
       end
 
-      get "http://app.example.com/v1/manager/items"
+      @user_app = User.find_by(email: "app@admin.com")
+      headers = @user_app.create_new_auth_token if sign_in(@user_app)
+      get "http://app.example.com/v1/manager/items", params: {}, headers: headers
     end
 
     it 'returns status code 200' do
@@ -37,7 +39,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
     before() do
       @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
 
-      get "http://app.example.com/v1/manager/items/#{@item.id}"
+      @user_app = User.find_by(email: "app@admin.com")
+      headers = @user_app.create_new_auth_token if sign_in(@user_app)
+
+      get "http://app.example.com/v1/manager/items/#{@item.id}", params: {}, headers: headers
     end
 
     it 'returns status code 200' do
@@ -55,7 +60,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
       before() do
         item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10}}
         @item_count = Item.count
-        post "http://app.example.com/v1/manager/items/", params: item_params
+
+        @user_app = User.find_by(email: "app@admin.com")
+        headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        post "http://app.example.com/v1/manager/items/", params: item_params, headers: headers
       end
 
       it 'returns status code created' do
@@ -76,7 +84,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
       before() do
         item_params = {item: {name: nil, price: 5.90, available: true, quantity: 10}}
         @item_count = Item.count
-        post "http://app.example.com/v1/manager/items/", params: item_params
+
+        @user_app = User.find_by(email: "app@admin.com")
+        headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        post "http://app.example.com/v1/manager/items/", params: item_params, headers: headers
       end
 
       it 'returns status code unprocessable_entity' do
@@ -99,7 +110,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
       before() do
         @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
         item_params = {item: {name: "Cerveja 300ml", price: 4.90, available: true, quantity: 9}}
-        put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params
+
+        @user_app = User.find_by(email: "app@admin.com")
+        headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params, headers: headers
       end
 
       it 'returns status code updated' do
@@ -117,7 +131,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
         @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
         item_params = {item: {name: nil, price: 4.80, available: true, quantity: 9}}
         @item_count = Item.count
-        put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params
+
+        @user_app = User.find_by(email: "app@admin.com")
+        headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params, headers: headers
       end
 
       it 'returns status code unprocessable_entity' do
@@ -140,7 +157,10 @@ RSpec.describe "V1::Manager::Items", type: :request do
       @item = create(:item_with_category, price: 5.99, name: "Litrão Skol")
       @item_2 = create(:item_with_category, price: 6.99, name: "Litrão Antartica")
       @item_count = Item.count
-      delete "http://app.example.com/v1/manager/items/#{@item.id}"
+
+      @user_app = User.find_by(email: "app@admin.com")
+      headers = @user_app.create_new_auth_token if sign_in(@user_app)
+      delete "http://app.example.com/v1/manager/items/#{@item.id}", params: {}, headers: headers
     end
 
     it 'returns status code deleted' do

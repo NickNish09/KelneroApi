@@ -1,6 +1,6 @@
 module V1
   module Manager
-    class RestaurantsController < ManagerController
+    class RestaurantsController < ApiController
       before_action :set_restaurant, only: [:show, :update, :destroy]
       before_action :check_if_owner, only: [:show, :update, :destroy]
 

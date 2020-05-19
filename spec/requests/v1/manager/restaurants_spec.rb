@@ -16,7 +16,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "GET #index" do
     context "with permissions" do
-      before() do
+      before do
         @user = create(:user)
         RESTAURANTS_SIZE.times do |i|
           @restaurant = create(:restaurant, user: @user, name: "Restaurante #{i+1}", subdomain: "restaurante_#{i+1}")
@@ -37,7 +37,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "GET #show" do
     context "with permissions" do
-      before() do
+      before do
         @user = create(:user)
         @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
 
@@ -56,7 +56,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
     end
 
     context "without permissions" do
-      before() do
+      before do
         @user = create(:user)
         @user_without_permission = create(:user)
         @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
@@ -77,7 +77,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "POST #create" do
     context "with valid params" do
-      before() do
+      before do
         @user = create(:user)
         restaurants_params = {restaurant: {name: "Restaurante",
                                     opening_hour: "9:00",
@@ -104,7 +104,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
     end
 
     context "with invalid params" do
-      before() do
+      before do
         @user = create(:user)
         restaurants_params = {restaurant: {name: "",
                                            opening_hour: "9:00",
@@ -134,7 +134,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
   describe "PUT #update" do
     context "with authorized user" do
       context "with valid params" do
-        before() do
+        before do
           @user = create(:user)
           @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
           restaurants_params = {restaurant: {name: "Restaurante Modificado",
@@ -156,7 +156,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
       end
 
       context "with invalid params" do
-        before() do
+        before do
           @user = create(:user)
           @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
           restaurants_params = {restaurant: {name: "",
@@ -185,7 +185,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
     end
 
     context "with unauthorized user" do
-      before() do
+      before do
         @user = create(:user)
         @user_without_permission = create(:user)
         @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
@@ -211,7 +211,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
 
   describe "DELETE #destroy" do
     context "with user authorized" do
-      before() do
+      before do
         @user = create(:user)
         @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
         @restaurant_count = @user.restaurants.count
@@ -229,7 +229,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
     end
 
     context "with user unauthorized" do
-      before() do
+      before do
         @user = create(:user)
         @user_without_permission = create(:user)
         @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
