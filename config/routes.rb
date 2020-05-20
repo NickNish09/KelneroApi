@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         resources :items
         resources :tables
         resources :bills
+        resources :categories
       end
     end
   end
