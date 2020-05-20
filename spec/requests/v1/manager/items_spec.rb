@@ -58,7 +58,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
   describe "POST #create" do
     context "with valid params" do
       before() do
-        @category = create(:category)
+        @category = create(:category, name: "Principais")
         item_params = {item: {name: "Cerveja 600ml", price: 5.90, available: true, quantity: 10, category_ids: [@category.id]}}
         @item_count = Item.count
 
