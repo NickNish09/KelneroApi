@@ -20,7 +20,11 @@ class Bill < ApplicationRecord
   end
 
   def broadcast_to_channel
-    ActionCable.server.broadcast 'bills_channel', bill: self
+    BillsChannel.broadcast_to restaurant, bill: self
+  end
+
+  def restaurant
+    Restaurant.find_by(subdomain: Apartment::Tenant.current)
   end
 
 end
