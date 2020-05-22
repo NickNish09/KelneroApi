@@ -6,6 +6,8 @@ class SubdomainConstraint
 end
 
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   scope :v1 do
     mount_devise_token_auth_for 'User', at: 'auth'
   end

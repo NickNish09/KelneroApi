@@ -7,6 +7,8 @@ class Bill < ApplicationRecord
 
   validates :final_bill, presence: true
 
+  after_save :broadcast_to_channel
+
   def as_json(options = {})
     {
       id: id,
@@ -16,4 +18,9 @@ class Bill < ApplicationRecord
       bill_items: bill_items,
     }
   end
+
+  def broadcast_to_channel
+    ActionCable.server.broadcast 'bills_channel', bill: self
+  end
+
 end
