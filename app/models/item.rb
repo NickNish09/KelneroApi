@@ -17,4 +17,16 @@ class Item < ApplicationRecord
       categories: categories,
     }
   end
+
+  def just_content
+    {
+      id: id,
+      name: name,
+      price: price,
+      available: available,
+      quantity: quantity,
+      created_at: created_at,
+      updated_at: updated_at,
+    }
+  end
 end

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     namespace :user do
       constraints SubdomainConstraint do
         resources :orders, only: [:index, :create]
+        resources :menus, only: [:index]
       end
     end
   end
