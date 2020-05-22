@@ -13,7 +13,6 @@ class Bill < ApplicationRecord
     {
       id: id,
       final_bill: final_bill,
-      table: table,
       user: user,
       orders: orders,
     }
