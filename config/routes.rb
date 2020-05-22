@@ -22,6 +22,12 @@ Rails.application.routes.draw do
         resources :categories
       end
     end
+
+    namespace :user do
+      constraints SubdomainConstraint do
+        resources :orders, only: [:index, :create]
+      end
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

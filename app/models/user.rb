@@ -10,4 +10,19 @@ class User < ActiveRecord::Base
 
   has_many :restaurants
   has_many :bills
+
+  def current_bill
+    self.bills.last
+  end
+
+  def as_json(options = {})
+    {
+      id: id,
+      uid: uid,
+      name: name,
+      nickname: nickname,
+      image: image,
+      email: email,
+    }
+  end
 end
