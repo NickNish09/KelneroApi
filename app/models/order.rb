@@ -1,4 +1,4 @@
-class BillItem < ApplicationRecord
+class Order < ApplicationRecord
   belongs_to :item
   belongs_to :bill
 
@@ -13,7 +13,7 @@ class BillItem < ApplicationRecord
   end
 
   def update_final_bill
-    self.bill.final_bill += self.item.price
+    self.bill.final_bill += self.item.price * self.quantity
     self.bill.save
   end
 end

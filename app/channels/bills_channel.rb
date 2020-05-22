@@ -10,6 +10,6 @@ class BillsChannel < ApplicationCable::Channel
   private
 
   def bills_restaurant
-    @restaurant = Restaurant.find_by(subdomain: params[:subdomain])
+    Restaurant.find_by(subdomain: params[:subdomain])
   end
 end

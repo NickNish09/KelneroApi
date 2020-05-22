@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/nicknish/Projects/KelneroApi/spec/models/bill_item_spec.rb": {
+      "/Users/nicknish/Projects/KelneroApi/spec/channels/bills_channel_spec.rb": {
         "lines": [
           1,
           null,
@@ -347,11 +347,11 @@
           null,
           null,
           null,
+          1,
+          1,
+          1,
           null,
-          null,
-          null,
-          null,
-          null,
+          1,
           null,
           null,
           null,
@@ -511,18 +511,6 @@
           null
         ]
       },
-      "/Users/nicknish/Projects/KelneroApi/spec/factories/bill_items.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
       "/Users/nicknish/Projects/KelneroApi/spec/factories/bills.rb": {
         "lines": [
           1,
@@ -574,6 +562,18 @@
           21,
           null,
           null,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/factories/orders.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -635,6 +635,8 @@
           null,
           1,
           1,
+          null,
+          1,
           1,
           null,
           null,
@@ -653,11 +655,30 @@
           null
         ]
       },
-      "/Users/nicknish/Projects/KelneroApi/app/models/bill_item.rb": {
+      "/Users/nicknish/Projects/KelneroApi/app/channels/bills_channel.rb": {
         "lines": [
           1,
           1,
+          0,
+          null,
+          null,
           1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/channels/application_cable/channel.rb": {
+        "lines": [
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -680,6 +701,27 @@
           1,
           null,
           1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          39,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          26,
+          null,
+          null,
+          1,
+          26,
+          null,
+          null,
           null
         ]
       },
@@ -748,6 +790,38 @@
           null,
           null,
           null,
+          null,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/spec/models/order_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/nicknish/Projects/KelneroApi/app/models/order.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
           null,
           null
         ]
@@ -2379,6 +2453,17 @@
           1,
           1,
           1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           1,
           null,
           null,
@@ -2418,6 +2503,8 @@
           1,
           null,
           null,
+          1,
+          1,
           1,
           1,
           1,
@@ -2428,6 +2515,6 @@
         ]
       }
     },
-    "timestamp": 1590096789
+    "timestamp": 1590169102
   }
 }

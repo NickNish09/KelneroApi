@@ -2,8 +2,8 @@ class Bill < ApplicationRecord
   belongs_to :table, optional: true
   belongs_to :user, optional: true
 
-  has_many :bill_items
-  has_many :items, through: :bill_items
+  has_many :orders
+  has_many :items, through: :orders
 
   validates :final_bill, presence: true
 
@@ -15,7 +15,7 @@ class Bill < ApplicationRecord
       final_bill: final_bill,
       table: table,
       user: user,
-      bill_items: bill_items,
+      orders: orders,
     }
   end
 
