@@ -14,7 +14,7 @@
       <img src="./assets/0.12.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2020-05-23T19:10:58-03:00">2020-05-23T19:10:58-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2020-05-23T20:11:36-03:00">2020-05-23T20:11:36-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  98.82%
+  98.29%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.68
+         2.66
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>1020</b> relevant lines,
-    <span class="green"><b>1008</b> lines covered</span> and
-    <span class="red"><b>12</b> lines missed. </span>
+    <b>1053</b> relevant lines,
+    <span class="green"><b>1035</b> lines covered</span> and
+    <span class="red"><b>18</b> lines missed. </span>
     (<span class="green">
-  98.82%
+  98.29%
 </span>
 )
   </div>
@@ -138,12 +138,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#8ce5f6a8f74f51c5353855548732a166a0a4e23c" class="src_link" title="app/controllers/v1/manager/items_controller.rb">app/controllers/v1/manager/items_controller.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">92.86 %</td>
-            <td class="cell--number">61</td>
-            <td class="cell--number">28</td>
-            <td class="cell--number">26</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">2.61</td>
+            <td class="yellow strong cell--number t-file__coverage">82.86 %</td>
+            <td class="cell--number">73</td>
+            <td class="cell--number">35</td>
+            <td class="cell--number">29</td>
+            <td class="cell--number">6</td>
+            <td class="cell--number">2.26</td>
             
           </tr>
         
@@ -215,12 +215,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#1813e94f06175a3c2b9df79d8ae26dfe8d1b9d1b" class="src_link" title="app/models/item.rb">app/models/item.rb</a></td>
-            <td class="yellow strong cell--number t-file__coverage">88.89 %</td>
-            <td class="cell--number">32</td>
-            <td class="cell--number">9</td>
-            <td class="cell--number">8</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">2.78</td>
+            <td class="yellow strong cell--number t-file__coverage">82.35 %</td>
+            <td class="cell--number">48</td>
+            <td class="cell--number">17</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">3</td>
+            <td class="cell--number">3.82</td>
             
           </tr>
         
@@ -436,9 +436,9 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#24df4ca8fbebaabc78133fda90b0085c52c676a9" class="src_link" title="db/schema.rb">db/schema.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">132</td>
-            <td class="cell--number">98</td>
-            <td class="cell--number">98</td>
+            <td class="cell--number">154</td>
+            <td class="cell--number">116</td>
+            <td class="cell--number">116</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -2477,8 +2477,8 @@
   <div class="header">
     <h3>app/controllers/v1/manager/items_controller.rb</h3>
     <h4>
-      <span class="green">
-  92.86%
+      <span class="yellow">
+  82.86%
 </span>
 
       lines covered
@@ -2487,9 +2487,9 @@
     
 
     <div class="t-line-summary">
-      <b>28</b> relevant lines.
-      <span class="green"><b>26</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <b>35</b> relevant lines.
+      <span class="green"><b>29</b> lines covered</span> and
+      <span class="red"><b>6</b> lines missed.</span>
     </div>
 
     
@@ -2803,40 +2803,40 @@
 
             
 
+            <code class="ruby">          if params[:item][:image]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="29">
+            
+            
+
+            
+
+            <code class="ruby">            @item.image.attach(io: image_io, filename: @item.image_name)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby">          end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="31">
+            <span class="hits">4</span>
+            
+
+            
+
             <code class="ruby">          render json: @item, status: :created, location: v1_manager_item_url(@item)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="29">
-            
-            
-
-            
-
-            <code class="ruby">        else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="3" data-linenumber="30">
-            <span class="hits">3</span>
-            
-
-            
-
-            <code class="ruby">          render json: @item.errors, status: :unprocessable_entity</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="31">
-            
-            
-
-            
-
-            <code class="ruby">        end</code>
           </li>
         </div>
       
@@ -2847,78 +2847,12 @@
 
             
 
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="33">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="34">
-            
-            
-
-            
-
-            <code class="ruby">      # PATCH/PUT /v1/manager/restaurants/items/1</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="35">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      def update</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="5" data-linenumber="36">
-            <span class="hits">5</span>
-            
-
-            
-
-            <code class="ruby">        if @item.update(item_params)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="37">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">          render json: @item</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="38">
-            
-            
-
-            
-
             <code class="ruby">        else</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="39">
+          <li class="covered" data-hits="3" data-linenumber="33">
             <span class="hits">3</span>
             
 
@@ -2929,7 +2863,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="40">
+          <li class="never" data-hits="" data-linenumber="34">
             
             
 
@@ -2940,7 +2874,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="41">
+          <li class="never" data-hits="" data-linenumber="35">
             
             
 
@@ -2951,13 +2885,79 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="42">
+          <li class="never" data-hits="" data-linenumber="36">
             
             
 
             
 
             <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="37">
+            
+            
+
+            
+
+            <code class="ruby">      # PATCH/PUT /v1/manager/restaurants/items/1</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="38">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      def update</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="5" data-linenumber="39">
+            <span class="hits">5</span>
+            
+
+            
+
+            <code class="ruby">        if @item.update(item_params)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="40">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">          render json: @item</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby">        else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="42">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">          render json: @item.errors, status: :unprocessable_entity</code>
           </li>
         </div>
       
@@ -2968,29 +2968,29 @@
 
             
 
-            <code class="ruby">      # DELETE /v1/manager/restaurants/items/1</code>
+            <code class="ruby">        end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="44">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="44">
+            
             
 
             
 
-            <code class="ruby">      def destroy</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="45">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="45">
+            
             
 
             
 
-            <code class="ruby">        @item.destroy</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -3001,29 +3001,29 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">      # DELETE /v1/manager/restaurants/items/1</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="47">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
+          <li class="covered" data-hits="1" data-linenumber="47">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      private</code>
+            <code class="ruby">      def destroy</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="48">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">        @item.destroy</code>
           </li>
         </div>
       
@@ -3034,29 +3034,29 @@
 
             
 
-            <code class="ruby">      # Use callbacks to share common setup or constraints between actions.</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
+          <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="51">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      def set_item</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="9" data-linenumber="51">
-            <span class="hits">9</span>
-            
-
-            
-
-            <code class="ruby">        @item = Item.find(params[:id])</code>
+            <code class="ruby">      private</code>
           </li>
         </div>
       
@@ -3067,51 +3067,51 @@
 
             
 
+            <code class="ruby">      # Use callbacks to share common setup or constraints between actions.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="53">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      def set_item</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="9" data-linenumber="54">
+            <span class="hits">9</span>
+            
+
+            
+
+            <code class="ruby">        @item = Item.find(params[:id])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
             <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="53">
+          <li class="never" data-hits="" data-linenumber="56">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="54">
-            
-            
-
-            
-
-            <code class="ruby">      # Only allow a trusted parameter &quot;white list&quot; through.</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="55">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      def item_params</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="12" data-linenumber="56">
-            <span class="hits">12</span>
-            
-
-            
-
-            <code class="ruby">        params.require(:item).permit(:name, :price, :available, :quantity, category_ids: [])</code>
           </li>
         </div>
       
@@ -3122,29 +3122,29 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">      # Only allow a trusted parameter &quot;white list&quot; through.</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="58">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="58">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      def item_params</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="59">
-            
-            
-
+          <li class="covered" data-hits="12" data-linenumber="59">
+            <span class="hits">12</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">        params.require(:item).permit(:name, :price, :available, :quantity, category_ids: [])</code>
           </li>
         </div>
       
@@ -3155,12 +3155,144 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="61">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="62">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      def image_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="63">
+            
+            
+
+            
+
+            <code class="ruby">        params.require(:item).permit(:image)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="64">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="66">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      def image_io</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="67">
+            
+            
+
+            
+
+            <code class="ruby">        decoded_image = Base64.decode64(params[:item][:image])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="68">
+            
+            
+
+            
+
+            <code class="ruby">        StringIO.new(decoded_image)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="69">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="70">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="71">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="73">
             
             
 
@@ -5346,7 +5478,7 @@
     <h3>app/models/item.rb</h3>
     <h4>
       <span class="yellow">
-  88.89%
+  82.35%
 </span>
 
       lines covered
@@ -5355,9 +5487,9 @@
     
 
     <div class="t-line-summary">
-      <b>9</b> relevant lines.
-      <span class="green"><b>8</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>17</b> relevant lines.
+      <span class="green"><b>14</b> lines covered</span> and
+      <span class="red"><b>3</b> lines missed.</span>
     </div>
 
     
@@ -5385,7 +5517,7 @@
 
             
 
-            <code class="ruby">  has_many :item_categories, dependent: :destroy</code>
+            <code class="ruby">  include Rails.application.routes.url_helpers</code>
           </li>
         </div>
       
@@ -5396,12 +5528,23 @@
 
             
 
+            <code class="ruby">  has_many :item_categories, dependent: :destroy</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  has_many :categories, through: :item_categories</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="4">
+          <li class="never" data-hits="" data-linenumber="5">
             
             
 
@@ -5412,24 +5555,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="5">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  validates :name, presence: true</code>
-          </li>
-        </div>
-      
-        <div>
           <li class="covered" data-hits="1" data-linenumber="6">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  validates :price, presence: true</code>
+            <code class="ruby">  has_one_attached :image</code>
           </li>
         </div>
       
@@ -5451,133 +5583,23 @@
 
             
 
-            <code class="ruby">  def as_json(options = {})</code>
+            <code class="ruby">  validates :name, presence: true</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    {</code>
+            
+
+            <code class="ruby">  validates :price, presence: true</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="18" data-linenumber="10">
-            <span class="hits">18</span>
-            
-
-            
-
-            <code class="ruby">      id: id,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="11">
-            
-            
-
-            
-
-            <code class="ruby">      name: name,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="12">
-            
-            
-
-            
-
-            <code class="ruby">      price: price,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="13">
-            
-            
-
-            
-
-            <code class="ruby">      available: available,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
-            
-
-            <code class="ruby">      quantity: quantity,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="15">
-            
-            
-
-            
-
-            <code class="ruby">      created_at: created_at,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="16">
-            
-            
-
-            
-
-            <code class="ruby">      updated_at: updated_at,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="17">
-            
-            
-
-            
-
-            <code class="ruby">      categories: categories,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="18">
-            
-            
-
-            
-
-            <code class="ruby">    }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="19">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="20">
+          <li class="never" data-hits="" data-linenumber="10">
             
             
 
@@ -5588,18 +5610,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
+          <li class="covered" data-hits="1" data-linenumber="11">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def just_content</code>
+            <code class="ruby">  def as_json(options = {})</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="22">
+          <li class="never" data-hits="" data-linenumber="12">
             
             
 
@@ -5610,8 +5632,8 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="23">
-            
+          <li class="covered" data-hits="18" data-linenumber="13">
+            <span class="hits">18</span>
             
 
             
@@ -5621,7 +5643,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
+          <li class="never" data-hits="" data-linenumber="14">
             
             
 
@@ -5632,7 +5654,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="never" data-hits="" data-linenumber="15">
             
             
 
@@ -5643,7 +5665,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -5654,7 +5676,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
+          <li class="never" data-hits="" data-linenumber="17">
             
             
 
@@ -5665,7 +5687,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
+          <li class="never" data-hits="" data-linenumber="18">
             
             
 
@@ -5676,7 +5698,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="29">
+          <li class="never" data-hits="" data-linenumber="19">
             
             
 
@@ -5687,7 +5709,29 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="30">
+          <li class="never" data-hits="" data-linenumber="20">
+            
+            
+
+            
+
+            <code class="ruby">      categories: categories,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="21">
+            
+            
+
+            
+
+            <code class="ruby">      image_url: image_url,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="22">
             
             
 
@@ -5698,7 +5742,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="never" data-hits="" data-linenumber="23">
             
             
 
@@ -5709,7 +5753,271 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="24">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def just_content</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby">    {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">      id: id,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby">      name: name,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="29">
+            
+            
+
+            
+
+            <code class="ruby">      price: price,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby">      available: available,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="31">
+            
+            
+
+            
+
+            <code class="ruby">      quantity: quantity,</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="never" data-hits="" data-linenumber="32">
+            
+            
+
+            
+
+            <code class="ruby">      created_at: created_at,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="33">
+            
+            
+
+            
+
+            <code class="ruby">      updated_at: updated_at,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="34">
+            
+            
+
+            
+
+            <code class="ruby">    }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="36">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="37">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def image_name</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="38">
+            
+            
+
+            
+
+            <code class="ruby">    &quot;#{name}_#{id}_image&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="39">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="40">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="41">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def image_url</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="18" data-linenumber="42">
+            <span class="hits">18</span>
+            
+
+            
+
+            <code class="ruby">    if self.image.attached?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="43">
+            
+            
+
+            
+
+            <code class="ruby">      url_for self.image</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby">    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="18" data-linenumber="45">
+            <span class="hits">18</span>
+            
+
+            
+
+            <code class="ruby">      &quot;http://images.virgula.com.br/2016/06/galaxias.jpg&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="46">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="47">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="48">
             
             
 
@@ -11354,8 +11662,8 @@
     
 
     <div class="t-line-summary">
-      <b>98</b> relevant lines.
-      <span class="green"><b>98</b> lines covered</span> and
+      <b>116</b> relevant lines.
+      <span class="green"><b>116</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -11505,7 +11813,7 @@
 
             
 
-            <code class="ruby">ActiveRecord::Schema.define(version: 2020_05_22_190551) do</code>
+            <code class="ruby">ActiveRecord::Schema.define(version: 2020_05_23_221625) do</code>
           </li>
         </div>
       
@@ -11560,7 +11868,7 @@
 
             
 
-            <code class="ruby">  create_table &quot;bill_items&quot;, force: :cascade do |t|</code>
+            <code class="ruby">  create_table &quot;active_storage_attachments&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
@@ -11571,7 +11879,7 @@
 
             
 
-            <code class="ruby">    t.bigint &quot;item_id&quot;, null: false</code>
+            <code class="ruby">    t.string &quot;name&quot;, null: false</code>
           </li>
         </div>
       
@@ -11582,7 +11890,7 @@
 
             
 
-            <code class="ruby">    t.bigint &quot;bill_id&quot;, null: false</code>
+            <code class="ruby">    t.string &quot;record_type&quot;, null: false</code>
           </li>
         </div>
       
@@ -11593,7 +11901,7 @@
 
             
 
-            <code class="ruby">    t.integer &quot;quantity&quot;</code>
+            <code class="ruby">    t.bigint &quot;record_id&quot;, null: false</code>
           </li>
         </div>
       
@@ -11604,7 +11912,7 @@
 
             
 
-            <code class="ruby">    t.text &quot;details&quot;</code>
+            <code class="ruby">    t.bigint &quot;blob_id&quot;, null: false</code>
           </li>
         </div>
       
@@ -11615,7 +11923,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+            <code class="ruby">    t.datetime &quot;created_at&quot;, null: false</code>
           </li>
         </div>
       
@@ -11626,7 +11934,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
+            <code class="ruby">    t.index [&quot;blob_id&quot;], name: &quot;index_active_storage_attachments_on_blob_id&quot;</code>
           </li>
         </div>
       
@@ -11637,23 +11945,12 @@
 
             
 
-            <code class="ruby">    t.index [&quot;bill_id&quot;], name: &quot;index_bill_items_on_bill_id&quot;</code>
+            <code class="ruby">    t.index [&quot;record_type&quot;, &quot;record_id&quot;, &quot;name&quot;, &quot;blob_id&quot;], name: &quot;index_active_storage_attachments_uniqueness&quot;, unique: true</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="26">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.index [&quot;item_id&quot;], name: &quot;index_bill_items_on_item_id&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="27">
+          <li class="never" data-hits="" data-linenumber="26">
             
             
 
@@ -11664,7 +11961,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
+          <li class="never" data-hits="" data-linenumber="27">
             
             
 
@@ -11675,13 +11972,24 @@
         </div>
       
         <div>
+          <li class="covered" data-hits="1" data-linenumber="28">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  create_table &quot;active_storage_blobs&quot;, force: :cascade do |t|</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="29">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  create_table &quot;bills&quot;, force: :cascade do |t|</code>
+            <code class="ruby">    t.string &quot;key&quot;, null: false</code>
           </li>
         </div>
       
@@ -11692,7 +12000,7 @@
 
             
 
-            <code class="ruby">    t.float &quot;final_bill&quot;</code>
+            <code class="ruby">    t.string &quot;filename&quot;, null: false</code>
           </li>
         </div>
       
@@ -11703,7 +12011,7 @@
 
             
 
-            <code class="ruby">    t.bigint &quot;table_id&quot;</code>
+            <code class="ruby">    t.string &quot;content_type&quot;</code>
           </li>
         </div>
       
@@ -11714,7 +12022,7 @@
 
             
 
-            <code class="ruby">    t.bigint &quot;user_id&quot;</code>
+            <code class="ruby">    t.text &quot;metadata&quot;</code>
           </li>
         </div>
       
@@ -11725,7 +12033,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+            <code class="ruby">    t.bigint &quot;byte_size&quot;, null: false</code>
           </li>
         </div>
       
@@ -11736,7 +12044,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
+            <code class="ruby">    t.string &quot;checksum&quot;, null: false</code>
           </li>
         </div>
       
@@ -11747,7 +12055,7 @@
 
             
 
-            <code class="ruby">    t.index [&quot;table_id&quot;], name: &quot;index_bills_on_table_id&quot;</code>
+            <code class="ruby">    t.datetime &quot;created_at&quot;, null: false</code>
           </li>
         </div>
       
@@ -11758,7 +12066,7 @@
 
             
 
-            <code class="ruby">    t.index [&quot;user_id&quot;], name: &quot;index_bills_on_user_id&quot;</code>
+            <code class="ruby">    t.index [&quot;key&quot;], name: &quot;index_active_storage_blobs_on_key&quot;, unique: true</code>
           </li>
         </div>
       
@@ -11791,7 +12099,7 @@
 
             
 
-            <code class="ruby">  create_table &quot;categories&quot;, force: :cascade do |t|</code>
+            <code class="ruby">  create_table &quot;bill_items&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
@@ -11802,7 +12110,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;name&quot;</code>
+            <code class="ruby">    t.bigint &quot;item_id&quot;, null: false</code>
           </li>
         </div>
       
@@ -11813,7 +12121,7 @@
 
             
 
-            <code class="ruby">    t.boolean &quot;main&quot;, default: false</code>
+            <code class="ruby">    t.bigint &quot;bill_id&quot;, null: false</code>
           </li>
         </div>
       
@@ -11824,7 +12132,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+            <code class="ruby">    t.integer &quot;quantity&quot;</code>
           </li>
         </div>
       
@@ -11835,29 +12143,29 @@
 
             
 
+            <code class="ruby">    t.text &quot;details&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="44">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="45">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="44">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="45">
-            
-            
-
-            
-
-            <code class="ruby"></code>
           </li>
         </div>
       
@@ -11868,7 +12176,7 @@
 
             
 
-            <code class="ruby">  create_table &quot;item_categories&quot;, force: :cascade do |t|</code>
+            <code class="ruby">    t.index [&quot;bill_id&quot;], name: &quot;index_bill_items_on_bill_id&quot;</code>
           </li>
         </div>
       
@@ -11879,29 +12187,29 @@
 
             
 
-            <code class="ruby">    t.bigint &quot;item_id&quot;, null: false</code>
+            <code class="ruby">    t.index [&quot;item_id&quot;], name: &quot;index_bill_items_on_item_id&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="48">
+            
             
 
             
 
-            <code class="ruby">    t.bigint &quot;category_id&quot;, null: false</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="49">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="49">
+            
             
 
             
 
-            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -11912,7 +12220,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
+            <code class="ruby">  create_table &quot;bills&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
@@ -11923,7 +12231,7 @@
 
             
 
-            <code class="ruby">    t.index [&quot;category_id&quot;], name: &quot;index_item_categories_on_category_id&quot;</code>
+            <code class="ruby">    t.float &quot;final_bill&quot;</code>
           </li>
         </div>
       
@@ -11934,29 +12242,29 @@
 
             
 
-            <code class="ruby">    t.index [&quot;item_id&quot;], name: &quot;index_item_categories_on_item_id&quot;</code>
+            <code class="ruby">    t.bigint &quot;table_id&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="53">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="53">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  end</code>
+            
+
+            <code class="ruby">    t.bigint &quot;user_id&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="54">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
@@ -11967,7 +12275,7 @@
 
             
 
-            <code class="ruby">  create_table &quot;items&quot;, force: :cascade do |t|</code>
+            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
@@ -11978,7 +12286,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;name&quot;</code>
+            <code class="ruby">    t.index [&quot;table_id&quot;], name: &quot;index_bills_on_table_id&quot;</code>
           </li>
         </div>
       
@@ -11989,56 +12297,12 @@
 
             
 
-            <code class="ruby">    t.float &quot;price&quot;</code>
+            <code class="ruby">    t.index [&quot;user_id&quot;], name: &quot;index_bills_on_user_id&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="58">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.boolean &quot;available&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.integer &quot;quantity&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="60">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="61">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="never" data-hits="" data-linenumber="58">
             
             
 
@@ -12049,7 +12313,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="63">
+          <li class="never" data-hits="" data-linenumber="59">
             
             
 
@@ -12060,62 +12324,40 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="64">
+          <li class="covered" data-hits="1" data-linenumber="60">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  create_table &quot;orders&quot;, force: :cascade do |t|</code>
+            <code class="ruby">  create_table &quot;categories&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="65">
+          <li class="covered" data-hits="1" data-linenumber="61">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    t.bigint &quot;item_id&quot;, null: false</code>
+            <code class="ruby">    t.string &quot;name&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="66">
+          <li class="covered" data-hits="1" data-linenumber="62">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    t.bigint &quot;bill_id&quot;, null: false</code>
+            <code class="ruby">    t.boolean &quot;main&quot;, default: false</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.integer &quot;quantity&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="68">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.text &quot;details&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="69">
+          <li class="covered" data-hits="1" data-linenumber="63">
             <span class="hits">1</span>
             
 
@@ -12126,7 +12368,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="70">
+          <li class="covered" data-hits="1" data-linenumber="64">
             <span class="hits">1</span>
             
 
@@ -12137,13 +12379,79 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="65">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="66">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="67">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  create_table &quot;item_categories&quot;, force: :cascade do |t|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="68">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.bigint &quot;item_id&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="69">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.bigint &quot;category_id&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="70">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="71">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    t.integer &quot;status&quot;, default: 0</code>
+            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
@@ -12154,7 +12462,7 @@
 
             
 
-            <code class="ruby">    t.index [&quot;bill_id&quot;], name: &quot;index_orders_on_bill_id&quot;</code>
+            <code class="ruby">    t.index [&quot;category_id&quot;], name: &quot;index_item_categories_on_category_id&quot;</code>
           </li>
         </div>
       
@@ -12165,7 +12473,7 @@
 
             
 
-            <code class="ruby">    t.index [&quot;item_id&quot;], name: &quot;index_orders_on_item_id&quot;</code>
+            <code class="ruby">    t.index [&quot;item_id&quot;], name: &quot;index_item_categories_on_item_id&quot;</code>
           </li>
         </div>
       
@@ -12198,7 +12506,7 @@
 
             
 
-            <code class="ruby">  create_table &quot;restaurants&quot;, force: :cascade do |t|</code>
+            <code class="ruby">  create_table &quot;items&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
@@ -12220,7 +12528,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;opening_hour&quot;</code>
+            <code class="ruby">    t.float &quot;price&quot;</code>
           </li>
         </div>
       
@@ -12231,7 +12539,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;closing_hour&quot;</code>
+            <code class="ruby">    t.boolean &quot;available&quot;</code>
           </li>
         </div>
       
@@ -12242,7 +12550,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;is_open&quot;</code>
+            <code class="ruby">    t.integer &quot;quantity&quot;</code>
           </li>
         </div>
       
@@ -12253,7 +12561,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;subdomain&quot;</code>
+            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
@@ -12264,45 +12572,12 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="83">
-            <span class="hits">1</span>
-            
-
-            
-
             <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="84">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.bigint &quot;user_id&quot;, null: false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="85">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.index [&quot;user_id&quot;], name: &quot;index_restaurants_on_user_id&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="86">
+          <li class="never" data-hits="" data-linenumber="83">
             
             
 
@@ -12313,7 +12588,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="87">
+          <li class="never" data-hits="" data-linenumber="84">
             
             
 
@@ -12324,13 +12599,46 @@
         </div>
       
         <div>
+          <li class="covered" data-hits="1" data-linenumber="85">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  create_table &quot;orders&quot;, force: :cascade do |t|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="86">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.bigint &quot;item_id&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="87">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.bigint &quot;bill_id&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="88">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  create_table &quot;tables&quot;, force: :cascade do |t|</code>
+            <code class="ruby">    t.integer &quot;quantity&quot;</code>
           </li>
         </div>
       
@@ -12341,7 +12649,7 @@
 
             
 
-            <code class="ruby">    t.integer &quot;number&quot;</code>
+            <code class="ruby">    t.text &quot;details&quot;</code>
           </li>
         </div>
       
@@ -12368,24 +12676,24 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="92">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="92">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  end</code>
+            
+
+            <code class="ruby">    t.integer &quot;status&quot;, default: 0</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="93">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="93">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">    t.index [&quot;bill_id&quot;], name: &quot;index_orders_on_bill_id&quot;</code>
           </li>
         </div>
       
@@ -12396,29 +12704,29 @@
 
             
 
-            <code class="ruby">  create_table &quot;users&quot;, force: :cascade do |t|</code>
+            <code class="ruby">    t.index [&quot;item_id&quot;], name: &quot;index_orders_on_item_id&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="95">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="95">
+            
             
 
             
 
-            <code class="ruby">    t.string &quot;provider&quot;, default: &quot;email&quot;, null: false</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="96">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="96">
+            
             
 
             
 
-            <code class="ruby">    t.string &quot;uid&quot;, default: &quot;&quot;, null: false</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -12429,7 +12737,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;encrypted_password&quot;, default: &quot;&quot;, null: false</code>
+            <code class="ruby">  create_table &quot;restaurants&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
@@ -12440,7 +12748,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;reset_password_token&quot;</code>
+            <code class="ruby">    t.string &quot;name&quot;</code>
           </li>
         </div>
       
@@ -12451,7 +12759,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;reset_password_sent_at&quot;</code>
+            <code class="ruby">    t.string &quot;opening_hour&quot;</code>
           </li>
         </div>
       
@@ -12462,7 +12770,7 @@
 
             
 
-            <code class="ruby">    t.boolean &quot;allow_password_change&quot;, default: false</code>
+            <code class="ruby">    t.string &quot;closing_hour&quot;</code>
           </li>
         </div>
       
@@ -12473,7 +12781,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;remember_created_at&quot;</code>
+            <code class="ruby">    t.string &quot;is_open&quot;</code>
           </li>
         </div>
       
@@ -12484,7 +12792,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;confirmation_token&quot;</code>
+            <code class="ruby">    t.string &quot;subdomain&quot;</code>
           </li>
         </div>
       
@@ -12495,7 +12803,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;confirmed_at&quot;</code>
+            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
@@ -12506,7 +12814,7 @@
 
             
 
-            <code class="ruby">    t.datetime &quot;confirmation_sent_at&quot;</code>
+            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
           </li>
         </div>
       
@@ -12517,7 +12825,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;unconfirmed_email&quot;</code>
+            <code class="ruby">    t.bigint &quot;user_id&quot;, null: false</code>
           </li>
         </div>
       
@@ -12528,29 +12836,29 @@
 
             
 
-            <code class="ruby">    t.string &quot;name&quot;</code>
+            <code class="ruby">    t.index [&quot;user_id&quot;], name: &quot;index_restaurants_on_user_id&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="107">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="107">
+            
             
 
             
 
-            <code class="ruby">    t.string &quot;nickname&quot;</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="108">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="108">
+            
             
 
             
 
-            <code class="ruby">    t.string &quot;image&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -12561,7 +12869,7 @@
 
             
 
-            <code class="ruby">    t.string &quot;email&quot;</code>
+            <code class="ruby">  create_table &quot;tables&quot;, force: :cascade do |t|</code>
           </li>
         </div>
       
@@ -12572,7 +12880,7 @@
 
             
 
-            <code class="ruby">    t.json &quot;tokens&quot;</code>
+            <code class="ruby">    t.integer &quot;number&quot;</code>
           </li>
         </div>
       
@@ -12599,106 +12907,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="113">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.integer &quot;sign_in_count&quot;, default: 0, null: false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="114">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.datetime &quot;current_sign_in_at&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="115">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.datetime &quot;last_sign_in_at&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="116">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.inet &quot;current_sign_in_ip&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="117">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.inet &quot;last_sign_in_ip&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="118">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.index [&quot;confirmation_token&quot;], name: &quot;index_users_on_confirmation_token&quot;, unique: true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="119">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.index [&quot;email&quot;], name: &quot;index_users_on_email&quot;, unique: true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="120">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.index [&quot;reset_password_token&quot;], name: &quot;index_users_on_reset_password_token&quot;, unique: true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="121">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    t.index [&quot;uid&quot;, &quot;provider&quot;], name: &quot;index_users_on_uid_and_provider&quot;, unique: true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="122">
+          <li class="never" data-hits="" data-linenumber="113">
             
             
 
@@ -12709,7 +12918,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="123">
+          <li class="never" data-hits="" data-linenumber="114">
             
             
 
@@ -12720,13 +12929,112 @@
         </div>
       
         <div>
+          <li class="covered" data-hits="1" data-linenumber="115">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  create_table &quot;users&quot;, force: :cascade do |t|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="116">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.string &quot;provider&quot;, default: &quot;email&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="117">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.string &quot;uid&quot;, default: &quot;&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="118">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.string &quot;encrypted_password&quot;, default: &quot;&quot;, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="119">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.string &quot;reset_password_token&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="120">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;reset_password_sent_at&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="121">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.boolean &quot;allow_password_change&quot;, default: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="122">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;remember_created_at&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="123">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.string &quot;confirmation_token&quot;</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="124">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  add_foreign_key &quot;bill_items&quot;, &quot;bills&quot;</code>
+            <code class="ruby">    t.datetime &quot;confirmed_at&quot;</code>
           </li>
         </div>
       
@@ -12737,7 +13045,7 @@
 
             
 
-            <code class="ruby">  add_foreign_key &quot;bill_items&quot;, &quot;items&quot;</code>
+            <code class="ruby">    t.datetime &quot;confirmation_sent_at&quot;</code>
           </li>
         </div>
       
@@ -12748,7 +13056,7 @@
 
             
 
-            <code class="ruby">  add_foreign_key &quot;bills&quot;, &quot;tables&quot;</code>
+            <code class="ruby">    t.string &quot;unconfirmed_email&quot;</code>
           </li>
         </div>
       
@@ -12759,7 +13067,7 @@
 
             
 
-            <code class="ruby">  add_foreign_key &quot;item_categories&quot;, &quot;categories&quot;</code>
+            <code class="ruby">    t.string &quot;name&quot;</code>
           </li>
         </div>
       
@@ -12770,7 +13078,7 @@
 
             
 
-            <code class="ruby">  add_foreign_key &quot;item_categories&quot;, &quot;items&quot;</code>
+            <code class="ruby">    t.string &quot;nickname&quot;</code>
           </li>
         </div>
       
@@ -12781,7 +13089,7 @@
 
             
 
-            <code class="ruby">  add_foreign_key &quot;orders&quot;, &quot;bills&quot;</code>
+            <code class="ruby">    t.string &quot;image&quot;</code>
           </li>
         </div>
       
@@ -12792,7 +13100,7 @@
 
             
 
-            <code class="ruby">  add_foreign_key &quot;orders&quot;, &quot;items&quot;</code>
+            <code class="ruby">    t.string &quot;email&quot;</code>
           </li>
         </div>
       
@@ -12803,12 +13111,254 @@
 
             
 
+            <code class="ruby">    t.json &quot;tokens&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="132">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;created_at&quot;, precision: 6, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="133">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;updated_at&quot;, precision: 6, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="134">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.integer &quot;sign_in_count&quot;, default: 0, null: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="135">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;current_sign_in_at&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="136">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.datetime &quot;last_sign_in_at&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="137">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.inet &quot;current_sign_in_ip&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="138">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.inet &quot;last_sign_in_ip&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="139">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.index [&quot;confirmation_token&quot;], name: &quot;index_users_on_confirmation_token&quot;, unique: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="140">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.index [&quot;email&quot;], name: &quot;index_users_on_email&quot;, unique: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="141">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.index [&quot;reset_password_token&quot;], name: &quot;index_users_on_reset_password_token&quot;, unique: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="142">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    t.index [&quot;uid&quot;, &quot;provider&quot;], name: &quot;index_users_on_uid_and_provider&quot;, unique: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="143">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="144">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="145">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;active_storage_attachments&quot;, &quot;active_storage_blobs&quot;, column: &quot;blob_id&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="146">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;bill_items&quot;, &quot;bills&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="147">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;bill_items&quot;, &quot;items&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="148">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;bills&quot;, &quot;tables&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="149">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;item_categories&quot;, &quot;categories&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="150">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;item_categories&quot;, &quot;items&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="151">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;orders&quot;, &quot;bills&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="152">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  add_foreign_key &quot;orders&quot;, &quot;items&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="153">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">  add_foreign_key &quot;restaurants&quot;, &quot;users&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="132">
+          <li class="never" data-hits="" data-linenumber="154">
             
             
 

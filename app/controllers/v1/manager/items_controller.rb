@@ -25,6 +25,9 @@ module V1
         @item = Item.new(item_params)
 
         if @item.save
+          if params[:item][:image]
+            @item.image.attach(io: image_io, filename: @item.image_name)
+          end
           render json: @item, status: :created, location: v1_manager_item_url(@item)
         else
           render json: @item.errors, status: :unprocessable_entity
@@ -54,6 +57,15 @@ module V1
       # Only allow a trusted parameter "white list" through.
       def item_params
         params.require(:item).permit(:name, :price, :available, :quantity, category_ids: [])
+      end
+
+      def image_params
+        params.require(:item).permit(:image)
+      end
+
+      def image_io
+        decoded_image = Base64.decode64(params[:item][:image])
+        StringIO.new(decoded_image)
       end
     end
 
