@@ -9,6 +9,12 @@ module V1
         render json: @items
       end
 
+      def get_itens_by_category
+        @category = Category.find params[:id]
+
+        render json: @category.items
+      end
+
       # GET /v1/manager/restaurants/items/1
       def show
         render json: @item

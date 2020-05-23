@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :restaurants
       constraints SubdomainConstraint do
         resources :items
+        get '/get_itens_by_category/:id' => 'items#get_itens_by_category'
         resources :tables
         resources :bills
         resources :categories
