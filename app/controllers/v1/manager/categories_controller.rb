@@ -12,7 +12,7 @@ module V1
 
       # GET /v1/manager/categories/1
       def show
-        render json: @category
+        render json: @category.items
       end
 
       # POST /v1/manager/categories
