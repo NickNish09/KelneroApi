@@ -12,9 +12,13 @@ module V1
       def create
         @orders = order_params # array de itens pedidos
         @items = @orders[:items]
-        current_user.current_bill.orders.create(@items)
 
-        render json: {msg: "criado"}
+        @created_array = current_user.current_bill.orders.create(@items)
+        if @created_array.map{ |order| order.persisted?}.include?(false) # ver se algum pedido não foi criado
+          render json: {error: 'Um dos pedidos não pode ser criado'}, status: :unprocessable_entity
+        else
+          render json: current_user.current_bill, status: :created
+        end
       end
 
       private

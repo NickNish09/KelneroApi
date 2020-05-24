@@ -111,6 +111,7 @@ GEM
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    jaro_winkler (1.5.3)
     kwalify (0.7.2)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -217,8 +218,16 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
+    rubocop (0.75.1)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.6)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 1.7)
     ruby-graphviz (1.2.5)
       rexml
+    ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
@@ -254,6 +263,7 @@ GEM
     tty-which (0.4.2)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    unicode-display_width (1.6.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -285,6 +295,7 @@ DEPENDENCIES
   redis (~> 4.0)
   ros-apartment
   rspec-rails (= 4.0.1)
+  rubocop
   rubycritic
   simplecov
   spring

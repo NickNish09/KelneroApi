@@ -62,4 +62,64 @@ RSpec.describe "V1::User::Orders", type: :request do
     end
   end
 
+  describe "POST #create" do
+    context "with valid params" do
+      before do
+        headers = valid_headers
+        @bill = create(:bill, user: @user)
+        @bill_orders = @bill.items.count
+        post "http://app.example.com/v1/user/orders/", params: valid_attributes, headers: headers
+      end
+
+      it 'returns status code created' do
+        expect(response).to have_http_status(:created)
+      end
+
+      it 'should return the bill with the new items in the bill' do
+        expect(JSON.parse(response.body)['orders'].size).to eq(1)
+      end
+
+      it 'should create an item in the DB' do
+        expect(@bill.items.count).to eq @bill_orders + 1
+      end
+    end
+
+    context "with invalid params" do
+      before do
+        headers = valid_headers
+        @bill = create(:bill, user: @user)
+        @bill_orders = @bill.items.count
+        post "http://app.example.com/v1/user/orders/", params: invalid_attributes, headers: headers
+      end
+
+      it 'returns status code unprocessable_entity' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq('Um dos pedidos não pode ser criado')
+      end
+
+      it 'should not create an item in the DB' do
+        expect(@bill.items.count).to eq @bill_orders
+      end
+    end
+
+    context "with no user authentitication" do
+      before do
+        headers = valid_headers
+        @bill = create(:bill, user: @user)
+        post "http://app.example.com/v1/user/orders/", params: valid_attributes, headers: unauthorized_headers
+      end
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq("você precisa estar autenticado para fazer o pedido")
+      end
+    end
+  end
+
 end

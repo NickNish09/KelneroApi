@@ -41,6 +41,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem "rubycritic", require: false
   gem 'simplecov', require: false
+  gem 'rubocop', require: false
 end
 
 group :development do
