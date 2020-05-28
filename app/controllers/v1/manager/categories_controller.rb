@@ -7,7 +7,7 @@ module V1
       def index
         @categories = Category.all
 
-        render json: @categories
+        render json: @categories, include: [:items]
       end
 
       # GET /v1/manager/categories/1
