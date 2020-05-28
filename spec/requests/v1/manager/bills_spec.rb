@@ -30,12 +30,16 @@ RSpec.describe "/v1/manager/bills", type: :request do
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
     @user_app = User.find_by(email: "app@admin.com")
-    @user_app.create_new_auth_token
+    headers = @user_app.create_new_auth_token
+    headers["Subdomain"] = 'app'
+    headers
   }
 
   let(:unauthorized_headers) {
     @user_unauthorized = create(:user)
-    @user_unauthorized.create_new_auth_token
+    headers = @user_unauthorized.create_new_auth_token
+    headers["Subdomain"] = 'app'
+    headers
   }
 
   BILLS_SIZE = 3

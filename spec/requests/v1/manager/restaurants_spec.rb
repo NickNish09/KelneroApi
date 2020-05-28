@@ -22,6 +22,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
           @restaurant = create(:restaurant, user: @user, name: "Restaurante #{i+1}", subdomain: "restaurante_#{i+1}")
         end
         headers = @user.create_new_auth_token if sign_in(@user)
+        headers["Subdomain"] = 'app'
         get "http://app.example.com/v1/manager/restaurants", params: {}, headers: headers
       end
 
@@ -42,6 +43,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
 
         headers = @user.create_new_auth_token if sign_in(@user)
+        headers["Subdomain"] = 'app'
         get "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
       end
 
@@ -62,6 +64,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
 
         headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
+        headers["Subdomain"] = 'app'
         get "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
       end
 
@@ -87,6 +90,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
                                     subdomain: "restaurante"}}
         @restaurant_count = @user.restaurants.count
         headers = @user.create_new_auth_token if sign_in(@user)
+        headers["Subdomain"] = 'app'
         post "http://app.example.com/v1/manager/restaurants/", params: restaurants_params, headers: headers
       end
 
@@ -114,6 +118,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
                                            subdomain: "restaurante"}}
         @restaurant_count = @user.restaurants.count
         headers = @user.create_new_auth_token if sign_in(@user)
+        headers["Subdomain"] = 'app'
         post "http://app.example.com/v1/manager/restaurants/", params: restaurants_params, headers: headers
       end
 
@@ -143,6 +148,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
                                              is_open: true,
                                              subdomain: "restaurante"}}
           headers = @user.create_new_auth_token if sign_in(@user)
+          headers["Subdomain"] = 'app'
           put "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: restaurants_params, headers: headers
         end
 
@@ -165,6 +171,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
                                              is_open: true,
                                              subdomain: "restaurante"}}
           headers = @user.create_new_auth_token if sign_in(@user)
+          headers["Subdomain"] = 'app'
           @restaurant_count = @user.restaurants.count
           put "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: restaurants_params, headers: headers
         end
@@ -195,6 +202,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
                                            is_open: true,
                                            subdomain: "restaurante"}}
         headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
+        headers["Subdomain"] = 'app'
         put "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: restaurants_params, headers: headers
       end
 
@@ -216,6 +224,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
         @restaurant_count = @user.restaurants.count
         headers = @user.create_new_auth_token if sign_in(@user)
+        headers["Subdomain"] = 'app'
         delete "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
       end
 
@@ -235,6 +244,7 @@ RSpec.describe "/v1/manager/restaurants", type: :request do
         @restaurant = create(:restaurant, name: "Restaurante 1", user: @user)
         @restaurant_count = @user.restaurants.count
         headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
+        headers["Subdomain"] = 'app'
         delete "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
       end
 

@@ -23,6 +23,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
       @user_app = User.find_by(email: "app@admin.com")
       headers = @user_app.create_new_auth_token if sign_in(@user_app)
+      headers["Subdomain"] = 'app'
       get "http://app.example.com/v1/manager/items", params: {}, headers: headers
     end
 
@@ -48,6 +49,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
       @user_app = User.find_by(email: "app@admin.com")
       headers = @user_app.create_new_auth_token if sign_in(@user_app)
+      headers["Subdomain"] = 'app'
       get "http://app.example.com/v1/manager/get_itens_by_category/#{@category.id}", params: {}, headers: headers
     end
 
@@ -66,6 +68,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
       @user_app = User.find_by(email: "app@admin.com")
       headers = @user_app.create_new_auth_token if sign_in(@user_app)
+      headers["Subdomain"] = 'app'
 
       get "http://app.example.com/v1/manager/items/#{@item.id}", params: {}, headers: headers
     end
@@ -90,6 +93,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
         @user_app = User.find_by(email: "app@admin.com")
         headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        headers["Subdomain"] = 'app'
         post "http://app.example.com/v1/manager/items/", params: item_params, headers: headers
       end
 
@@ -118,6 +122,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
         @user_app = User.find_by(email: "app@admin.com")
         headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        headers["Subdomain"] = 'app'
         post "http://app.example.com/v1/manager/items/", params: item_params, headers: headers
       end
 
@@ -144,6 +149,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
         @user_app = User.find_by(email: "app@admin.com")
         headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        headers["Subdomain"] = 'app'
         put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params, headers: headers
       end
 
@@ -165,6 +171,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
         @user_app = User.find_by(email: "app@admin.com")
         headers = @user_app.create_new_auth_token if sign_in(@user_app)
+        headers["Subdomain"] = 'app'
         put "http://app.example.com/v1/manager/items/#{@item.id}", params: item_params, headers: headers
       end
 
@@ -191,6 +198,7 @@ RSpec.describe "V1::Manager::Items", type: :request do
 
       @user_app = User.find_by(email: "app@admin.com")
       headers = @user_app.create_new_auth_token if sign_in(@user_app)
+      headers["Subdomain"] = 'app'
       delete "http://app.example.com/v1/manager/items/#{@item.id}", params: {}, headers: headers
     end
 

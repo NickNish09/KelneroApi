@@ -5,7 +5,7 @@ module V1
     private
 
     def check_if_owner
-      @restaurant = Restaurant.find_by(subdomain: request.subdomain)
+      @restaurant = Restaurant.find_by(subdomain: request.headers["Subdomain"])
       unless @restaurant.user == current_user
         render json: { error: 'Apenas o dono do restaurante tem acesso à isso' }, status: :unauthorized
       end

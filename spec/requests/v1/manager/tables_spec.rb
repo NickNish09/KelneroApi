@@ -31,7 +31,9 @@ RSpec.describe "/v1/manager/tables", type: :request do
 
   let(:valid_headers) {
     @user_app = User.find_by(email: "app@admin.com")
-    @user_app.create_new_auth_token
+    headers = @user_app.create_new_auth_token
+    headers["Subdomain"] = 'app'
+    headers
   }
 
   describe "GET /index" do
@@ -70,7 +72,7 @@ RSpec.describe "/v1/manager/tables", type: :request do
       it "does not create a new Table" do
         expect {
           post "http://app.example.com/v1/manager/tables",
-               params: { table: invalid_attributes }
+               params: { table: invalid_attributes }, headers: valid_headers
         }.to change(Table, :count).by(0)
       end
 

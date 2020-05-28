@@ -101,9 +101,11 @@ end
 
 # Setup a custom Tenant switching middleware. The Proc should return the name of the Tenant that
 # you want to switch to.
-# Rails.application.config.middleware.use Apartment::Elevators::Generic, lambda { |request|
-#   request.host.split('.').first
-# }
+Rails.application.config.middleware.use Apartment::Elevators::Generic, lambda { |request|
+  headers = Hash[*request.env.select {|k,v| k.start_with? 'HTTP_'}.collect {|k,v| [k.sub(/^HTTP_/, ''), v]}.collect {|k,v|[k.split('_').collect(&:capitalize).join('-'), v]}.sort.flatten]
+  headers["Subdomain"]
+  # request.host.split('.').first
+}
 
 # Rails.application.config.middleware.use Apartment::Elevators::Domain
 
