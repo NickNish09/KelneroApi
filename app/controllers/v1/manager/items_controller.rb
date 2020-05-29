@@ -26,7 +26,8 @@ module V1
 
         if @item.save
           if params[:item][:image]
-            @item.image.attach(io: image_io, filename: @item.image_name)
+            byebug
+            @item.image.attach(io: image_io, filename: params[:item][:filename])
           end
           render json: @item, status: :created, location: v1_manager_item_url(@item)
         else
@@ -56,11 +57,11 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def item_params
-        params.require(:item).permit(:name, :price, :available, :quantity, category_ids: [])
+        params.require(:item).permit(:name, :price, :available, :description, :quantity, category_ids: [])
       end
 
       def image_params
-        params.require(:item).permit(:image)
+        params.require(:item).permit(:image, :filename)
       end
 
       def image_io

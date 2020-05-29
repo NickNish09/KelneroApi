@@ -19,6 +19,7 @@ class Item < ApplicationRecord
       updated_at: updated_at,
       categories: categories,
       image_url: image_url,
+      formated_created_at: formated_created_at
     }
   end
 
@@ -26,11 +27,15 @@ class Item < ApplicationRecord
     "#{name}_#{id}_image"
   end
 
+  def formated_created_at
+    created_at.strftime("%d/%m/%y")
+  end
+
   def image_url
     if self.image.attached?
       url_for self.image
     else
-      "http://images.virgula.com.br/2016/06/galaxias.jpg"
+      "https://www.receitadevovo.com.br/gbau/sistema/receitas/img/escondidinho-de-carne-moida_25092018135200.jpg"
     end
   end
 end
