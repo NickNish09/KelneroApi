@@ -26,8 +26,7 @@ module V1
 
         if @item.save
           if params[:item][:image]
-            byebug
-            @item.image.attach(io: image_io, filename: params[:item][:filename])
+            @item.image.attach(io: StringIO.new(params[:item][:image]), filename: params[:item][:filename])
           end
           render json: @item, status: :created, location: v1_manager_item_url(@item)
         else

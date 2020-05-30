@@ -35,7 +35,8 @@ class Item < ApplicationRecord
     if self.image.attached?
       url_for self.image
     else
-      "https://www.receitadevovo.com.br/gbau/sistema/receitas/img/escondidinho-de-carne-moida_25092018135200.jpg"
+      # "https://www.receitadevovo.com.br/gbau/sistema/receitas/img/escondidinho-de-carne-moida_25092018135200.jpg"
+      ""
     end
   end
 end
