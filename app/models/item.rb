@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   include Rails.application.routes.url_helpers
   has_many :item_categories, dependent: :destroy
   has_many :categories, through: :item_categories
+  has_many :orders, dependent: :destroy
 
   has_one_attached :image
 
