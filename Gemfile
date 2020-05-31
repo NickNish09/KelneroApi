@@ -33,7 +33,7 @@ gem 'ros-apartment', require: 'apartment'
 # Internacionalização
 gem 'i18n', '~> 1.0'
 
-gem 'ros-apartment-sidekiq'
+# gem 'ros-apartment-sidekiq'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

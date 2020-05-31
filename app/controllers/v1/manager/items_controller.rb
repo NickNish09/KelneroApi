@@ -65,8 +65,10 @@ module V1
 
       def image_io
         decoded_image = Base64.decode64(params[:item][:image])
+        # decoded_image = params[:item][:image]
         StringIO.new(decoded_image)
       end
+
     end
 
   end

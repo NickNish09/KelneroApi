@@ -33,7 +33,8 @@ class Item < ApplicationRecord
 
   def image_url
     if self.image.attached?
-      url_for self.image
+      # rails_blob_path(self.image, only_path: true)
+      rails_blob_url self.image
     else
       "https://www.receitadevovo.com.br/gbau/sistema/receitas/img/escondidinho-de-carne-moida_25092018135200.jpg"
       # ""
