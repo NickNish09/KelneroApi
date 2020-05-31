@@ -5,7 +5,7 @@ module V1
 
       # GET /v1/manager/restaurants/items
       def index
-        @items = Item.all
+        @items = Item.all.order(created_at: :desc)
         render json: @items
       end
 
@@ -25,8 +25,8 @@ module V1
         @item = Item.new(item_params)
 
         if @item.save
-          if params[:item][:image]
-            @item.image.attach(io: StringIO.new(params[:item][:image]), filename: params[:item][:filename])
+          if params[:item][:image].to_s.length != 0
+            @item.image.attach(io: image_io, filename: params[:item][:filename])
           end
           render json: @item, status: :created, location: v1_manager_item_url(@item)
         else
