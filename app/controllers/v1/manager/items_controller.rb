@@ -37,6 +37,9 @@ module V1
       # PATCH/PUT /v1/manager/restaurants/items/1
       def update
         if @item.update(item_params)
+          if params[:item][:image].to_s.length != 0
+            @item.image.attach(io: image_io, filename: params[:item][:filename])
+          end
           render json: @item
         else
           render json: @item.errors, status: :unprocessable_entity
@@ -45,7 +48,11 @@ module V1
 
       # DELETE /v1/manager/restaurants/items/1
       def destroy
-        @item.destroy
+        if @item.destroy
+          render json: {title: 'Item deletado', msg: 'Item deletado com sucesso.'}
+        else
+          render json: {title: 'Falha ao deletar item', msg: 'Não foi possível deletar o item. Tente novamente.'}
+        end
       end
 
       private
