@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         get '/get_itens_by_category/:id' => 'items#get_itens_by_category'
         resources :tables
         resources :bills
+        resources :orders
         resources :categories
       end
     end

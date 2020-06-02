@@ -14,7 +14,7 @@ class Bill < ApplicationRecord
       id: id,
       final_bill: final_bill,
       user: user,
-      orders: orders,
+      orders: orders.order(status: :asc),
     }
   end
 

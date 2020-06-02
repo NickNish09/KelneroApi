@@ -9,7 +9,8 @@ class Order < ApplicationRecord
     {
       id: id,
       item: item,
-      quantity: quantity
+      quantity: quantity,
+      status: status,
     }
   end
 
