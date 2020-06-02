@@ -13,115 +13,126 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/v1/manager/orders", type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # V1::Manager::Order. As you add validations to V1::Manager::Order, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {order: {item_id: create(:item).id, quantity: 5, details: "", bill_id: create(:bill).id}}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {order: {item_id: nil, quantity: 5, details: ""}}
   }
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # V1::Manager::OrdersController, or in your router and rack
+  # BillsController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
-    {}
+    @user_app = User.find_by(email: "app@admin.com")
+    headers = @user_app.create_new_auth_token
+    headers["Subdomain"] = 'app'
+    headers
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      V1::Manager::Order.create! valid_attributes
-      get v1_manager_orders_url, headers: valid_headers, as: :json
-      expect(response).to be_successful
-    end
-  end
+  let(:unauthorized_headers) {
+    {"Subdomain": 'app'}
+  }
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      order = V1::Manager::Order.create! valid_attributes
-      get v1_manager_order_url(v1_manager_order), as: :json
-      expect(response).to be_successful
-    end
-  end
+  RESTAURANT_ORDERS = 5
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new V1::Manager::Order" do
-        expect {
-          post v1_manager_orders_url,
-               params: { v1/manager_order: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(V1::Manager::Order, :count).by(1)
+  describe "GET #index" do
+    context "with user signed_in" do
+      before do
+        headers = valid_headers
+        RESTAURANT_ORDERS.times do |i|
+          create(:order)
+        end
+        get "http://app.example.com/v1/manager/orders", params: {}, headers: headers
       end
 
-      it "renders a JSON response with the new v1/manager_order" do
-        post v1_manager_orders_url,
-             params: { v1/manager_order: valid_attributes }, headers: valid_headers, as: :json
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return all the restaurant orders' do
+        expect(JSON.parse(response.body).size).to eq(RESTAURANT_ORDERS)
+      end
+    end
+
+    context "with user not signed in" do
+      before do
+        headers = valid_headers
+        RESTAURANT_ORDERS.times do |i|
+          create(:bill, user: @user)
+        end
+        get "http://app.example.com/v1/manager/orders", params: {}, headers: unauthorized_headers
+      end
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq("Apenas o dono do restaurante tem acesso à isso")
+      end
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      before do
+        headers = valid_headers
+        @orders_count = Order.count
+        post "http://app.example.com/v1/manager/orders/", params: valid_attributes, headers: headers
+      end
+
+      it 'returns status code created' do
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
+      end
+
+      it 'should return the created order' do
+        expect(JSON.parse(response.body)['quantity']).to eq(5)
+      end
+
+      it 'should create an item in the DB' do
+        expect(Order.count).to eq @orders_count + 1
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new V1::Manager::Order" do
-        expect {
-          post v1_manager_orders_url,
-               params: { v1/manager_order: invalid_attributes }, as: :json
-        }.to change(V1::Manager::Order, :count).by(0)
+    context "with invalid params" do
+      before do
+        headers = valid_headers
+        @bill = create(:bill, user: @user)
+        @bill_orders = @bill.items.count
+        post "http://app.example.com/v1/manager/orders/", params: invalid_attributes, headers: headers
       end
 
-      it "renders a JSON response with errors for the new v1/manager_order" do
-        post v1_manager_orders_url,
-             params: { v1/manager_order: invalid_attributes }, headers: valid_headers, as: :json
+      it 'returns status code unprocessable_entity' do
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested v1/manager_order" do
-        order = V1::Manager::Order.create! valid_attributes
-        patch v1_manager_order_url(v1_manager_order),
-              params: { v1_manager_order: invalid_attributes }, headers: valid_headers, as: :json
-        order.reload
-        skip("Add assertions for updated state")
       end
 
-      it "renders a JSON response with the v1/manager_order" do
-        order = V1::Manager::Order.create! valid_attributes
-        patch v1_manager_order_url(v1_manager_order),
-              params: { v1_manager_order: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq("application/json")
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['item'][0]).to eq('é obrigatório(a)')
+        expect(JSON.parse(response.body)['bill'][0]).to eq('é obrigatório(a)')
+      end
+
+      it 'should not create an item in the DB' do
+        expect(@bill.items.count).to eq @bill_orders
       end
     end
 
-    context "with invalid parameters" do
-      it "renders a JSON response with errors for the v1/manager_order" do
-        order = V1::Manager::Order.create! valid_attributes
-        patch v1_manager_order_url(v1_manager_order),
-              params: { v1_manager_order: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+    context "with no user authentitication" do
+      before do
+        headers = valid_headers
+        @bill = create(:bill, user: @user)
+        post "http://app.example.com/v1/manager/orders/", params: valid_attributes, headers: unauthorized_headers
       end
-    end
-  end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested v1/manager_order" do
-      order = V1::Manager::Order.create! valid_attributes
-      expect {
-        delete v1_manager_order_url(v1_manager_order), headers: valid_headers, as: :json
-      }.to change(V1::Manager::Order, :count).by(-1)
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq("Apenas o dono do restaurante tem acesso à isso")
+      end
     end
   end
 end
