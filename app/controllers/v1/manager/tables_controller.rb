@@ -48,7 +48,7 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def table_params
-        params.require(:table).permit(:number)
+        params.require(:table).permit(:number, :rotation, :x_position, :y_position, :width, :height, :fill)
       end
     end
 

@@ -9,6 +9,17 @@ class Table < ApplicationRecord
       number: number,
       bills: bills,
       users: users,
+      x: x_position,
+      y: y_position,
+      width: width,
+      height: height,
+      rotation: rotation,
+      fill: fill,
+      table_name: table_name,
     }
+  end
+
+  def table_name
+    "Mesa #{number}"
   end
 end

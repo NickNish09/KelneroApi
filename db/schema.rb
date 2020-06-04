@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_29_193809) do
+ActiveRecord::Schema.define(version: 2020_06_04_174004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,12 @@ ActiveRecord::Schema.define(version: 2020_05_29_193809) do
     t.integer "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "x_position", default: 0.0
+    t.float "y_position", default: 0.0
+    t.float "width", default: 100.0
+    t.float "height", default: 100.0
+    t.string "fill", default: "#a6c9ff"
+    t.float "rotation"
   end
 
   create_table "users", force: :cascade do |t|
