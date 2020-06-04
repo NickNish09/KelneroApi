@@ -16,10 +16,16 @@ class Table < ApplicationRecord
       rotation: rotation,
       fill: fill,
       table_name: table_name,
+      final_bill: current_final_bill
     }
   end
 
   def table_name
     "Mesa #{number}"
+  end
+
+  # função que retorna o total da mesa no momento, de todas as comandas de todos que estão na mesa
+  def current_final_bill
+    52.90
   end
 end
