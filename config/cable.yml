@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  url: redis://redistogo:a39f47798a8593f4c7b3a484cfa21751@hammerjaw.redistogo.com:9107/
   channel_prefix: KelneroApi_production
