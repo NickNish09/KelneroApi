@@ -15,7 +15,7 @@ Rails.application.configure do
 
   config.web_socket_server_url = "wss://kelnero-api.herokuapp.com/cable"
 
-  config.action_cable.allowed_request_origins = ['https://kelnero.netlify.app/']
+  config.action_cable.allowed_request_origins = ['https://kelnero.netlify.app']
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
