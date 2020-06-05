@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   include Rails.application.routes.url_helpers
+  include ActionView::Helpers::NumberHelper
+
   has_many :item_categories, dependent: :destroy
   has_many :categories, through: :item_categories
   has_many :orders, dependent: :destroy
@@ -20,8 +22,13 @@ class Item < ApplicationRecord
       updated_at: updated_at,
       categories: categories,
       image_url: image_url,
-      formated_created_at: formated_created_at
+      formated_created_at: formated_created_at,
+      formated_price: formated_price,
     }
+  end
+
+  def formated_price
+    number_to_currency(price)
   end
 
   def image_name
