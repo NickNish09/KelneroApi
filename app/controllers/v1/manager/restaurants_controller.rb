@@ -21,6 +21,9 @@ module V1
         @restaurant = current_user.restaurants.new(restaurant_params)
 
         if @restaurant.save
+          if params[:restaurant][:logo].to_s.length != 0
+            @restaurant.logo.attach(io: image_io, filename: params[:restaurant][:logo_name])
+          end
           render json: @restaurant, status: :created, location: [:v1, :manager, @restaurant]
         else
           render json: @restaurant.errors, status: :unprocessable_entity
@@ -30,6 +33,9 @@ module V1
       # PATCH/PUT /v1/manager/restaurants/1
       def update
         if @restaurant.update(restaurant_params)
+          if params[:restaurant][:logo].to_s.length != 0
+            @restaurant.logo.attach(io: image_io, filename: params[:restaurant][:logo_name])
+          end
           render json: @restaurant
         else
           render json: @restaurant.errors, status: :unprocessable_entity
@@ -52,10 +58,20 @@ module V1
         params.require(:restaurant).permit(:name, :opening_hour, :closing_hour, :is_open, :subdomain)
       end
 
+      def image_params
+        params.require(:restaurant).permit(:logo, :logo_name)
+      end
+
       def check_if_owner
         unless @restaurant.user == current_user
           render json: { error: 'Apenas o dono do restaurante tem acesso à isso' }, status: :unauthorized
         end
+      end
+
+      def image_io
+        decoded_image = Base64.decode64(params[:restaurant][:logo])
+        # decoded_image = params[:item][:image]
+        StringIO.new(decoded_image)
       end
 
     end
