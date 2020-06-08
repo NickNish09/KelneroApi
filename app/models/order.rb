@@ -5,6 +5,8 @@ class Order < ApplicationRecord
 
   after_create :update_final_bill
 
+  validates :quantity, presence: true
+
   def as_json(options = {})
     {
       id: id,

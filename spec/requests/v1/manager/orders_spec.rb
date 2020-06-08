@@ -21,6 +21,14 @@ RSpec.describe "/v1/manager/orders", type: :request do
     {order: {item_id: nil, quantity: 5, details: ""}}
   }
 
+  let(:valid_update_attributes) {
+    {order: {quantity: 5, details: "Com molho"}}
+  }
+
+  let(:invalid_update_attributes) {
+    {order: {quantity: nil}}
+  }
+
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
   # BillsController, or in your router and rack
@@ -158,6 +166,58 @@ RSpec.describe "/v1/manager/orders", type: :request do
         headers = valid_headers
         @order = create(:order)
         get "http://app.example.com/v1/manager/orders/#{@order.id}", params: {}, headers: unauthorized_headers
+      end
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq("Apenas o dono do restaurante tem acesso à isso")
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    context "with valid params" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        put "http://app.example.com/v1/manager/orders/#{@order.id}", params: valid_update_attributes, headers: headers
+      end
+
+      it 'returns status code ok' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'should return the updated order' do
+        expect(JSON.parse(response.body)['order']['quantity']).to eq(5)
+      end
+
+    end
+
+    context "with invalid params" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        put "http://app.example.com/v1/manager/orders/#{@order.id}", params: invalid_update_attributes, headers: headers
+      end
+
+      it 'returns status code unprocessable_entity' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['quantity'][0]).to eq('não pode ficar em branco')
+      end
+
+    end
+
+    context "with no user authentitication" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        put "http://app.example.com/v1/manager/orders/#{@order.id}", params: valid_update_attributes, headers: unauthorized_headers
       end
 
       it 'returns status code 401' do
