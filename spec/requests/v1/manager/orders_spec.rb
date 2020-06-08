@@ -135,4 +135,38 @@ RSpec.describe "/v1/manager/orders", type: :request do
       end
     end
   end
+
+  describe "GET #show" do
+    context "with user signed_in" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        get "http://app.example.com/v1/manager/orders/#{@order.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return the restaurant order' do
+        expect(JSON.parse(response.body)['id']).to eq(@order.id)
+      end
+    end
+
+    context "with user not signed in" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        get "http://app.example.com/v1/manager/orders/#{@order.id}", params: {}, headers: unauthorized_headers
+      end
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq("Apenas o dono do restaurante tem acesso à isso")
+      end
+    end
+  end
 end
