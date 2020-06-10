@@ -22,6 +22,9 @@ class Restaurant < ApplicationRecord
 
   def create_tenant
     Apartment::Tenant.create(subdomain)
+    Apartment::Tenant.switch(subdomain) do
+      Category.create(name: "Principais")
+    end
   end
 
   def logo_url
