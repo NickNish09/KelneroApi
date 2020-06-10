@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
+  def self.top_selling_items
+    self.all.sort{|a,b| b.total_orders <=> a.total_orders}.first(10)
+  end
+
   def as_json(options = {})
     {
       id: id,
@@ -24,6 +28,7 @@ class Item < ApplicationRecord
       image_url: image_url,
       formated_created_at: formated_created_at,
       formated_price: formated_price,
+      total_orders: total_orders,
     }
   end
 
@@ -47,5 +52,14 @@ class Item < ApplicationRecord
       "https://www.receitadevovo.com.br/gbau/sistema/receitas/img/escondidinho-de-carne-moida_25092018135200.jpg"
       # ""
     end
+  end
+
+  def total_orders
+    total = 0
+    self.orders.each do |order|
+      total += order.quantity
+    end
+
+    total
   end
 end

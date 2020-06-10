@@ -7,6 +7,15 @@ class Order < ApplicationRecord
 
   validates :quantity, presence: true
 
+  def self.total_orders
+    total = 0
+    self.all.each do |order|
+      total += order.quantity
+    end
+
+    total
+  end
+
   def as_json(options = {})
     {
       id: id,

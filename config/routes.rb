@@ -23,6 +23,10 @@ Rails.application.routes.draw do
         resources :bills
         resources :orders
         resources :categories
+
+        #statistics routes
+        get '/top_selling_items' => 'statistics#top_selling_items'
+        get '/icons_stats' => 'statistics#icons_stats'
       end
     end
 
