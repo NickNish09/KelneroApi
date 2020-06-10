@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     namespace :manager do
       resources :restaurants
+      get 'main_restaurant' => 'restaurants#main_restaurant'
       constraints SubdomainConstraint do
         resources :items
         get '/get_itens_by_category/:id' => 'items#get_itens_by_category'

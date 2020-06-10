@@ -4,6 +4,10 @@ module V1
       before_action :set_restaurant, only: [:show, :update, :destroy]
       before_action :check_if_owner, only: [:show, :update, :destroy]
 
+      def main_restaurant
+        render json: current_user.main_restaurant
+      end
+
       # GET /v1/manager/restaurants
       def index
         @restaurants = current_user.restaurants

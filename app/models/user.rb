@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
       email: email,
     }
   end
+
+  def main_restaurant
+    self.restaurants.first
+  end
 end
