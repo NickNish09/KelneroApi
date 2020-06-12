@@ -14,6 +14,48 @@ require 'rails_helper'
 RSpec.describe "/v1/manager/restaurants", type: :request do
   RESTAURANTS_SIZE = 3
 
+  describe "GET #main_restaurant" do
+    context "with permissions" do
+      before do
+        @user = create(:user)
+        @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
+
+        headers = @user.create_new_auth_token if sign_in(@user)
+        headers["Subdomain"] = 'app'
+        get "http://app.example.com/v1/manager/main_restaurant", params: {}, headers: headers
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return the user restaurant' do
+        expect(JSON.parse(response.body)['id']).to eq(@restaurant.id)
+        expect(JSON.parse(response.body)['name']).to eq("Restaurante")
+      end
+    end
+
+    context "without permissions" do
+      before do
+        @user = create(:user)
+        @user_without_permission = create(:user)
+        @restaurant = create(:restaurant, user: @user, name: "Restaurante", subdomain: "restaurante")
+
+        headers = @user_without_permission.create_new_auth_token if sign_in(@user_without_permission)
+        headers["Subdomain"] = 'app'
+        get "http://app.example.com/v1/manager/restaurants/#{@restaurant.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq('Apenas o dono do restaurante tem acesso à isso')
+      end
+    end
+  end
+
   describe "GET #index" do
     context "with permissions" do
       before do
