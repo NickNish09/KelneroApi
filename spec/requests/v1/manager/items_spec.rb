@@ -203,12 +203,16 @@ RSpec.describe "V1::Manager::Items", type: :request do
       delete "http://app.example.com/v1/manager/items/#{@item.id}", params: {}, headers: headers
     end
 
-    it 'returns status code deleted' do
-      expect(response).to have_http_status(204)
+    it 'returns status code ok' do
+      expect(response).to have_http_status(200)
     end
 
     it 'should delete the item' do
       expect(Item.count).to eq @item_count - 1
+    end
+
+    it 'should return a confirmation message' do
+      expect(JSON.parse(response.body)['msg']).to eq('Item deletado com sucesso.')
     end
 
   end

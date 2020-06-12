@@ -229,4 +229,43 @@ RSpec.describe "/v1/manager/orders", type: :request do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    context "with user signed_in" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        @orders_count = Order.count
+        delete "http://app.example.com/v1/manager/orders/#{@order.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code ok' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'should delete the order from database' do
+        expect(Order.count).to eq @orders_count - 1
+      end
+
+      it 'should return a confirmation message' do
+        expect(JSON.parse(response.body)['msg']).to eq('Pedido deletado com sucesso.')
+      end
+    end
+
+    context "with user not signed in" do
+      before do
+        headers = valid_headers
+        @order = create(:order)
+        delete "http://app.example.com/v1/manager/orders/#{@order.id}", params: {}, headers: unauthorized_headers
+      end
+
+      it 'returns status code 401' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq("Apenas o dono do restaurante tem acesso à isso")
+      end
+    end
+  end
 end

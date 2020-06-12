@@ -49,9 +49,9 @@ module V1
       # DELETE /v1/manager/restaurants/items/1
       def destroy
         if @item.destroy
-          render json: {title: 'Item deletado', msg: 'Item deletado com sucesso.'}, status: 204
+          render json: {title: 'Item deletado', msg: 'Item deletado com sucesso.'}, status: 200
         else
-          render json: {title: 'Falha ao deletar item', msg: 'Não foi possível deletar o item. Tente novamente.'}
+          render json: {title: 'Falha ao deletar item', msg: 'Não foi possível deletar o item. Tente novamente.'}, status: :unauthorized
         end
       end
 

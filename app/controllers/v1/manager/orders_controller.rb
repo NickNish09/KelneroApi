@@ -37,7 +37,11 @@ module V1
 
       # DELETE /v1/manager/orders/1
       def destroy
-        @order.destroy
+        if @order.destroy
+          render json: {title: "Pedido deletado", msg: "Pedido deletado com sucesso."}, status: 200
+        else
+          render json: {title: "Falha ao deletar pedido", msg: "Não foi possível deletar o pedido. Tente novamente."}, status: :unauthorized
+        end
       end
 
       private
