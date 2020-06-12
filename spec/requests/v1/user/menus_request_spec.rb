@@ -28,8 +28,8 @@ RSpec.describe "V1::User::Menus", type: :request do
       end
 
       it 'should return all the menu of the restaurant' do
-        expect(JSON.parse(response.body).size).to eq(1) # tem uma categoria so criada
-        expect(JSON.parse(response.body)[0]['items'].size).to eq(1) # 1 item criado pra primeira categoria
+        expect(JSON.parse(response.body).size).to eq(2) # tem uma categoria e a principal
+        expect(JSON.parse(response.body).last['items'].size).to eq(1) # 1 item criado pra primeira categoria
       end
     end
 

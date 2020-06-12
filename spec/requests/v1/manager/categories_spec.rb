@@ -58,7 +58,7 @@ RSpec.describe "/v1/manager/categories", type: :request do
       end
 
       it 'should return all the restaurant categories' do
-        expect(JSON.parse(response.body).size).to eq(CATEGORIES_SIZE)
+        expect(JSON.parse(response.body).size).to eq(CATEGORIES_SIZE + 1) # cria a categoria principal sempre
       end
     end
   end
