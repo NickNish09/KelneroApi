@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         resources :bills
         resources :orders
         resources :categories
+        resources :waiters
 
         #statistics routes
         get '/top_selling_items' => 'statistics#top_selling_items'
