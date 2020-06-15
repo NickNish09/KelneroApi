@@ -1,4 +1,6 @@
 class Waiter < ApplicationRecord
+  belongs_to :restaurant
+
   before_create :set_auth_code
   before_create :set_token
 

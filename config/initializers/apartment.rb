@@ -49,7 +49,7 @@ Apartment.configure do |config|
   #   end
   # end
   #
-  config.excluded_models = %w{ User Restaurant ActiveStorage::Attachment ActiveStorage::Blob }
+  config.excluded_models = %w{ User Restaurant Waiter ActiveStorage::Attachment ActiveStorage::Blob }
   config.tenant_names = lambda { Restaurant.pluck :subdomain }
 
   # PostgreSQL:

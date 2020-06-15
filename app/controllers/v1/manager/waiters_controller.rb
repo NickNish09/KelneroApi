@@ -2,10 +2,11 @@ module V1
   module Manager
     class WaitersController < ManagerController
       before_action :set_waiter, only: [:show, :update, :destroy]
+      before_action :set_current_restaurant
 
       # GET /v1/manager/waiters
       def index
-        @waiters = Waiter.all
+        @waiters = @restaurant.waiters
 
         render json: @waiters
       end
@@ -17,7 +18,7 @@ module V1
 
       # POST /v1/manager/waiters
       def create
-        @waiter = Waiter.new(waiter_params)
+        @waiter = @restaurant.waiters.new(waiter_params)
 
         if @waiter.save
           render json: @waiter, status: :created, location: [:v1, :manager, @waiter]
@@ -49,6 +50,10 @@ module V1
       # Only allow a trusted parameter "white list" through.
       def waiter_params
         params.require(:waiter).permit(:name)
+      end
+
+      def set_current_restaurant
+        @restaurant = Restaurant.find_by(subdomain: request.headers["Subdomain"])
       end
     end
 
