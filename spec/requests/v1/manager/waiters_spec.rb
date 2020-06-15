@@ -17,111 +17,214 @@ RSpec.describe "/v1/manager/waiters", type: :request do
   # Waiter. As you add validations to Waiter, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {waiter: {name: "Idiosmar Pereira"}}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {waiter: {name: nil}}
   }
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # WaitersController, or in your router and rack
+  # CategoriesController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
-    {}
+    @user_app = User.find_by(email: "app@admin.com")
+    headers = @user_app.create_new_auth_token
+    headers["Subdomain"] = 'app'
+    headers
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Waiter.create! valid_attributes
-      get v1_manager_waiters_path, headers: valid_headers, as: :json
-      expect(response).to be_successful
-    end
-  end
+  let(:unauthorized_headers) {
+    @user_unauthorized = create(:user)
+    headers = @user_unauthorized.create_new_auth_token
+    headers["Subdomain"] = 'app'
+    headers
+  }
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      waiter = Waiter.create! valid_attributes
-      get v1_manager_waiter_path(waiter), as: :json
-      expect(response).to be_successful
-    end
-  end
+  WAITERS_SIZE = 3
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Waiter" do
-        expect {
-          post v1_manager_waiters_path,
-               params: { waiter: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(Waiter, :count).by(1)
+  describe "GET #index" do
+    context "with permissions" do
+      before do
+        WAITERS_SIZE.times do |i|
+          create(:waiter)
+        end
+        get "http://app.example.com/v1/manager/waiters", params: {}, headers: valid_headers
       end
 
-      it "renders a JSON response with the new waiter" do
-        post v1_manager_waiters_path,
-             params: { waiter: valid_attributes }, headers: valid_headers, as: :json
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return all the restaurant waiters' do
+        expect(JSON.parse(response.body).size).to eq(WAITERS_SIZE)
+      end
+    end
+  end
+
+  describe "GET #show" do
+    context "with permissions" do
+      before do
+        @waiter = create(:waiter)
+
+        get "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: {}, headers: valid_headers
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return the restaurant waiter' do
+        expect(JSON.parse(response.body)['id']).to eq(@waiter.id)
+      end
+    end
+
+    context "without permissions" do
+      before do
+        @waiter = create(:waiter)
+
+        get "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: {}, headers: unauthorized_headers
+      end
+
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq('Apenas o dono do restaurante tem acesso à isso')
+      end
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      before do
+        @waiter_count = Waiter.count
+        post "http://app.example.com/v1/manager/waiters/", params: valid_attributes, headers: valid_headers
+      end
+
+      it 'returns status code created' do
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
+      end
+
+      it 'should return the waiter created' do
+        expect(JSON.parse(response.body)['name']).to eq("Idiosmar Pereira")
+      end
+
+      it 'should create an waiter in the DB' do
+        expect(Waiter.count).to eq @waiter_count + 1
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Waiter" do
-        expect {
-          post v1_manager_waiters_path,
-               params: { waiter: invalid_attributes }, as: :json
-        }.to change(Waiter, :count).by(0)
+    context "with invalid params" do
+      before do
+        @waiter_count = Waiter.count
+        post "http://app.example.com/v1/manager/waiters/", params: invalid_attributes, headers: valid_headers
       end
 
-      it "renders a JSON response with errors for the new waiter" do
-        post v1_manager_waiters_path,
-             params: { waiter: invalid_attributes }, headers: valid_headers, as: :json
+      it 'returns status code unprocessable_entity' do
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
+      end
+
+      it 'should not create an waiter in the DB' do
+        expect(Waiter.count).to eq @waiter_count
       end
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe "PUT #update" do
+    context "with authorized user" do
+      context "with valid params" do
+        before do
+          @waiter = create(:waiter)
+          put "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: valid_attributes, headers: valid_headers
+        end
 
-      it "updates the requested waiter" do
-        waiter = Waiter.create! valid_attributes
-        patch v1_manager_waiter_path(waiter),
-              params: { waiter: invalid_attributes }, headers: valid_headers, as: :json
-        waiter.reload
-        skip("Add assertions for updated state")
+        it 'returns status code updated' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'should update the waiter and show it' do
+          expect(JSON.parse(response.body)['name']).to eq("Idiosmar Pereira")
+        end
       end
 
-      it "renders a JSON response with the waiter" do
-        waiter = Waiter.create! valid_attributes
-        patch v1_manager_waiter_path(waiter),
-              params: { waiter: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq("application/json")
+      context "with invalid params" do
+        before do
+          @waiter = create(:waiter)
+          @waiter_count = Waiter.count
+          put "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: invalid_attributes, headers: valid_headers
+        end
+
+        it 'returns status code unprocessable_entity' do
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'should return an error message' do
+          expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
+        end
+
+        it 'should not create an waiter in the DB' do
+          expect(Waiter.count).to eq @waiter_count
+        end
+
       end
     end
 
-    context "with invalid parameters" do
-      it "renders a JSON response with errors for the waiter" do
-        waiter = Waiter.create! valid_attributes
-        patch v1_manager_waiter_path(waiter),
-              params: { waiter: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+    context "with unauthorized user" do
+      before do
+        @waiter = create(:waiter)
+        put "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: valid_attributes, headers: unauthorized_headers
       end
+
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return an error message' do
+        expect(JSON.parse(response.body)['error']).to eq('Apenas o dono do restaurante tem acesso à isso')
+      end
+
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested waiter" do
-      waiter = Waiter.create! valid_attributes
-      expect {
-        delete v1_manager_waiter_path(waiter), headers: valid_headers, as: :json
-      }.to change(Waiter, :count).by(-1)
+  describe "DELETE #destroy" do
+    context "with user authorized" do
+      before do
+        @waiter = create(:waiter)
+        @waiter_count = Waiter.count
+        delete "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: {}, headers: valid_headers
+      end
+
+      it 'returns status code deleted' do
+        expect(response).to have_http_status(204)
+      end
+
+      it 'should delete the waiter' do
+        expect(Waiter.count).to eq @waiter_count - 1
+      end
     end
+
+    context "with user unauthorized" do
+      before do
+        @waiter = create(:waiter)
+        @waiter_count = Waiter.count
+        delete "http://app.example.com/v1/manager/waiters/#{@waiter.id}", params: {}, headers: unauthorized_headers
+      end
+
+      it 'returns status code unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should not delete the waiter' do
+        expect(Waiter.count).to eq @waiter_count
+      end
+    end
+
   end
 end

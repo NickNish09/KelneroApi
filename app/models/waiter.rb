@@ -2,6 +2,8 @@ class Waiter < ApplicationRecord
   before_create :set_auth_code
   before_create :set_token
 
+  validates :name, presence: true
+
   def set_auth_code
     chars = ('a'..'z').to_a + ('A'..'Z').to_a
     begin
