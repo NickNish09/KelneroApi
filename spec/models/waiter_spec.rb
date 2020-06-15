@@ -6,7 +6,7 @@ RSpec.describe Waiter, type: :model do
       @waiter = create(:waiter)
     end
 
-    it 'should be run before a waiter is created to set his auth code' do
+    it 'should be run before a waiters is created to set his auth code' do
       expect(@waiter.auth_code).to_not be_nil
     end
 
@@ -20,7 +20,7 @@ RSpec.describe Waiter, type: :model do
       @waiter = create(:waiter)
     end
 
-    it 'should generate a token to the waiter' do
+    it 'should generate a token to the waiters' do
       expect(@waiter.token).to_not be_nil
     end
   end

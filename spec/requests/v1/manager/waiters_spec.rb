@@ -75,7 +75,7 @@ RSpec.describe "/v1/manager/waiters", type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it 'should return the restaurant waiter' do
+      it 'should return the restaurant waiters' do
         expect(JSON.parse(response.body)['id']).to eq(@waiter.id)
       end
     end
@@ -108,11 +108,11 @@ RSpec.describe "/v1/manager/waiters", type: :request do
         expect(response).to have_http_status(:created)
       end
 
-      it 'should return the waiter created' do
+      it 'should return the waiters created' do
         expect(JSON.parse(response.body)['name']).to eq("Idiosmar Pereira")
       end
 
-      it 'should create an waiter in the DB' do
+      it 'should create an waiters in the DB' do
         expect(Waiter.count).to eq @waiter_count + 1
       end
     end
@@ -131,7 +131,7 @@ RSpec.describe "/v1/manager/waiters", type: :request do
         expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
       end
 
-      it 'should not create an waiter in the DB' do
+      it 'should not create an waiters in the DB' do
         expect(Waiter.count).to eq @waiter_count
       end
     end
@@ -149,7 +149,7 @@ RSpec.describe "/v1/manager/waiters", type: :request do
           expect(response).to have_http_status(200)
         end
 
-        it 'should update the waiter and show it' do
+        it 'should update the waiters and show it' do
           expect(JSON.parse(response.body)['name']).to eq("Idiosmar Pereira")
         end
       end
@@ -169,7 +169,7 @@ RSpec.describe "/v1/manager/waiters", type: :request do
           expect(JSON.parse(response.body)['name'][0]).to eq('não pode ficar em branco')
         end
 
-        it 'should not create an waiter in the DB' do
+        it 'should not create an waiters in the DB' do
           expect(Waiter.count).to eq @waiter_count
         end
 
@@ -205,7 +205,7 @@ RSpec.describe "/v1/manager/waiters", type: :request do
         expect(response).to have_http_status(204)
       end
 
-      it 'should delete the waiter' do
+      it 'should delete the waiters' do
         expect(Waiter.count).to eq @waiter_count - 1
       end
     end
@@ -221,7 +221,7 @@ RSpec.describe "/v1/manager/waiters", type: :request do
         expect(response).to have_http_status(:unauthorized)
       end
 
-      it 'should not delete the waiter' do
+      it 'should not delete the waiters' do
         expect(Waiter.count).to eq @waiter_count
       end
     end
