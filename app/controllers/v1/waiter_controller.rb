@@ -5,7 +5,7 @@ module V1
     private
 
     def current_waiter
-      Waiter.find_by(token: request.headers['token'])
+      Waiter.find_by(token: request.headers['Authorization'])
     end
 
     def check_permission
