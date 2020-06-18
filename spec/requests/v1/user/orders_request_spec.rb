@@ -11,7 +11,7 @@ RSpec.describe "V1::User::Orders", type: :request do
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # BillsController, or in your router and rack
+  # commandsController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
     @user = create(:user)
@@ -22,14 +22,14 @@ RSpec.describe "V1::User::Orders", type: :request do
     {}
   }
 
-  USER_BILLS = 5
+  USER_COMMANDS = 5
 
   describe "GET #index" do
     context "with user signed_in" do
       before do
         headers = valid_headers
-        USER_BILLS.times do |i|
-          create(:bill, user: @user)
+        USER_COMMANDS.times do |i|
+          create(:command, user: @user)
         end
         get "http://app.example.com/v1/user/orders", params: {}, headers: headers
       end
@@ -38,16 +38,16 @@ RSpec.describe "V1::User::Orders", type: :request do
         expect(response).to have_http_status(:success)
       end
 
-      it 'should return all the user bills' do
-        expect(JSON.parse(response.body).size).to eq(USER_BILLS)
+      it 'should return all the user commands' do
+        expect(JSON.parse(response.body).size).to eq(USER_COMMANDS)
       end
     end
 
     context "with user not signed in" do
       before do
         headers = valid_headers
-        USER_BILLS.times do |i|
-          create(:bill, user: @user)
+        USER_COMMANDS.times do |i|
+          create(:command, user: @user)
         end
         get "http://app.example.com/v1/user/orders", params: {}, headers: unauthorized_headers
       end
@@ -66,8 +66,8 @@ RSpec.describe "V1::User::Orders", type: :request do
     context "with valid params" do
       before do
         headers = valid_headers
-        @bill = create(:bill, user: @user)
-        @bill_orders = @bill.items.count
+        @command = create(:command, user: @user)
+        @command_orders = @command.items.count
         post "http://app.example.com/v1/user/orders/", params: valid_attributes, headers: headers
       end
 
@@ -75,20 +75,20 @@ RSpec.describe "V1::User::Orders", type: :request do
         expect(response).to have_http_status(:created)
       end
 
-      it 'should return the bill with the new items in the bill' do
+      it 'should return the command with the new items in the command' do
         expect(JSON.parse(response.body)['orders'].size).to eq(1)
       end
 
       it 'should create an item in the DB' do
-        expect(@bill.items.count).to eq @bill_orders + 1
+        expect(@command.items.count).to eq @command_orders + 1
       end
     end
 
     context "with invalid params" do
       before do
         headers = valid_headers
-        @bill = create(:bill, user: @user)
-        @bill_orders = @bill.items.count
+        @command = create(:command, user: @user)
+        @command_orders = @command.items.count
         post "http://app.example.com/v1/user/orders/", params: invalid_attributes, headers: headers
       end
 
@@ -101,14 +101,14 @@ RSpec.describe "V1::User::Orders", type: :request do
       end
 
       it 'should not create an item in the DB' do
-        expect(@bill.items.count).to eq @bill_orders
+        expect(@command.items.count).to eq @command_orders
       end
     end
 
     context "with no user authentitication" do
       before do
         headers = valid_headers
-        @bill = create(:bill, user: @user)
+        @command = create(:command, user: @user)
         post "http://app.example.com/v1/user/orders/", params: valid_attributes, headers: unauthorized_headers
       end
 

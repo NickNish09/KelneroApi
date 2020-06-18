@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :order do
     item { create(:item) }
-    bill { create(:bill) }
+    command { create(:command) }
     quantity { 1 }
     details { "Pedido 1" }
   end

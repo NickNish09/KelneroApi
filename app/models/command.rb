@@ -1,4 +1,4 @@
-class Bill < ApplicationRecord
+class Command < ApplicationRecord
   belongs_to :table, optional: true
   belongs_to :user, optional: true
 

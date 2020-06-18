@@ -1,14 +1,14 @@
 class Table < ApplicationRecord
   include ActionView::Helpers::NumberHelper
   validates :number, presence: true, uniqueness: true
-  has_many :bills
-  has_many :users, through: :bills
+  has_many :commands
+  has_many :users, through: :commands
 
   def as_json(options = {})
     {
       id: id,
       number: number,
-      bills: bills,
+      commands: commands,
       users: users,
       x: x_position,
       y: y_position,
@@ -29,8 +29,8 @@ class Table < ApplicationRecord
   # função que retorna o total da mesa no momento, de todas as comandas de todos que estão na mesa
   def current_final_bill
     total = 0
-    bills.each do |bill|
-      total += bill.final_bill
+    commands.each do |command|
+      total += command.final_bill
     end
 
     number_to_currency(total)
@@ -39,8 +39,8 @@ class Table < ApplicationRecord
   # function that returns the total of all command items in the table
   def total_bill_items
     total_orders = []
-    bills.each do |bill|
-      total_orders.concat(bill.orders)
+    commands.each do |command|
+      total_orders.concat(command.orders)
     end
 
     total_orders

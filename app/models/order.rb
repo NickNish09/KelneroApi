@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   enum status: %i[pendente entregue]
   belongs_to :item
-  belongs_to :bill
+  belongs_to :command
 
   after_create :update_final_bill
 
@@ -26,8 +26,8 @@ class Order < ApplicationRecord
   end
 
   def update_final_bill
-    self.bill.final_bill += self.item.price * self.quantity
-    self.bill.save
+    self.command.final_bill += self.item.price * self.quantity
+    self.command.save
   end
 
   def restaurant
