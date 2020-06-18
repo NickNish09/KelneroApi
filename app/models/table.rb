@@ -3,6 +3,7 @@ class Table < ApplicationRecord
   validates :number, presence: true, uniqueness: true
   has_many :commands
   has_many :users, through: :commands
+  has_many :bills
 
   def as_json(options = {})
     {
@@ -44,5 +45,18 @@ class Table < ApplicationRecord
     end
 
     total_orders
+  end
+
+  def current_bill
+    last_bill = bills.order(created_at: :asc).last
+    if last_bill # se tiver uma ultima conta aberta, verifica se já foi fechada ou não
+      if last_bill.is_closed? # se tiver fechada, então não existe conta atual
+        nil
+      else # senão retorna a última conta, que está aberta
+        last_bill
+      end
+    else # se não tiver, então só retorna nil
+      nil
+    end
   end
 end
