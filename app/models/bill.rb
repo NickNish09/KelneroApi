@@ -5,4 +5,13 @@ class Bill < ApplicationRecord
   def is_closed?
     !self.closed_in.nil?
   end
+
+  def total_orders
+     total = []
+     commands.each do |command|
+       total.concat(command.orders)
+     end
+
+     total
+  end
 end

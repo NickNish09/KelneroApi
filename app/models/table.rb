@@ -9,7 +9,6 @@ class Table < ApplicationRecord
     {
       id: id,
       number: number,
-      commands: commands,
       users: users,
       x: x_position,
       y: y_position,
@@ -19,7 +18,8 @@ class Table < ApplicationRecord
       fill: fill,
       table_name: table_name,
       final_bill: current_final_bill,
-      total_bill_items: total_bill_items
+      total_bill_items: total_bill_items,
+      bill: current_bill.as_json(include: {commands: {include: {orders: {include: [:item]}}}})
     }
   end
 
@@ -29,7 +29,7 @@ class Table < ApplicationRecord
 
   # função que retorna o total da mesa no momento, de todas as comandas de todos que estão na mesa
   def current_final_bill
-    total = 0
+    total = 0.0
     commands.each do |command|
       total += command.final_bill
     end
@@ -58,5 +58,14 @@ class Table < ApplicationRecord
     else # se não tiver, então só retorna nil
       nil
     end
+  end
+
+  def current_orders
+    if current_bill
+      current_bill.total_orders
+    else
+      []
+    end
+
   end
 end

@@ -5,8 +5,9 @@ class Command < ApplicationRecord
 
   has_many :orders
   has_many :items, through: :orders
+  accepts_nested_attributes_for :orders
 
-  validates :final_bill, presence: true
+  # validates :final_bill, presence: true
 
   after_save :broadcast_to_channel
   before_validation :set_bill, if: Proc.new{ |command| !command.table.nil?}
@@ -17,6 +18,7 @@ class Command < ApplicationRecord
       final_bill: final_bill,
       user: user,
       orders: orders.order(status: :asc),
+      table_name: bill.table.table_name
     }
   end
 
