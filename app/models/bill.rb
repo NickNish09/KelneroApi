@@ -14,4 +14,9 @@ class Bill < ApplicationRecord
 
      total
   end
+
+  def close_bill
+    self.closed_in = DateTime.now
+    self.save
+  end
 end

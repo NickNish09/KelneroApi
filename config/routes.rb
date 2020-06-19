@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       resources :tables, only: [:index, :show]
       resources :menus, only: [:index]
       resources :commands
+      post '/close_bill' => 'bills#close_bill'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

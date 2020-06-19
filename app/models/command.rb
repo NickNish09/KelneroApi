@@ -18,15 +18,16 @@ class Command < ApplicationRecord
       final_bill: final_bill,
       user: user,
       orders: orders.order(status: :asc),
-      table_name: bill.table.table_name
+      table_name: bill.table.table_name,
+      bill_id: bill.id
     }
   end
 
   def set_bill
     current_table_bill = table.current_bill
-    if current_table_bill
+    if current_table_bill # se tiver uma conta ja aberta já esta ela pra comanda
       self.bill = current_table_bill
-    else
+    else # senão abre a conta
       self.bill = Bill.create(table: table)
     end
   end
