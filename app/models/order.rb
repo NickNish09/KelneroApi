@@ -27,7 +27,7 @@ class Order < ApplicationRecord
   end
 
   def broadcast_command
-    BillsChannel.broadcast_to restaurant, bill: self.command
+    BillsChannel.broadcast_to restaurant, command: self.command
   end
 
   def update_final_bill

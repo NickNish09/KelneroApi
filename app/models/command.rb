@@ -49,7 +49,7 @@ class Command < ApplicationRecord
   end
 
   def broadcast_to_channel
-    BillsChannel.broadcast_to restaurant, bill: self
+    BillsChannel.broadcast_to restaurant, command: self
   end
 
   def restaurant
