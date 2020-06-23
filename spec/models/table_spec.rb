@@ -23,7 +23,7 @@ RSpec.describe Table, type: :model do
     end
 
     it 'should return all the items in the command from all commands' do
-      expect(@table.total_bill_items.count).to eq 20
+      expect(@table.total_bill_items.count).to eq 1
     end
   end
 end

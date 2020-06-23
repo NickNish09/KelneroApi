@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :command
 
   after_create :update_final_bill
-  after_update :broadcast_command
+  after_update :check_command_stat
 
   validates :quantity, presence: true
 
@@ -28,6 +28,23 @@ class Order < ApplicationRecord
 
   def broadcast_command
     BillsChannel.broadcast_to restaurant, command: self.command
+  end
+
+  def check_command_stat
+    statuses = self.command.orders.pluck(:status)
+    if statuses.include?("pendente")
+      unless self.command.pendente?
+        self.command.status = "pendente" # se a comanda não estiver pendente mas tiver pedidos pendentes, entao muda pra isso
+        self.command.save
+      end
+    else # caso em que não tem nenhum status pendente
+      if self.command.pendente?
+        self.command.status = "pronto"
+        self.command.save
+      end
+    end
+
+    broadcast_command
   end
 
   def update_final_bill

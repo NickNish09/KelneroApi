@@ -1,4 +1,5 @@
 class Command < ApplicationRecord
+  enum status: %i[pendente pronto entregue]
   belongs_to :table#, optional: true
   belongs_to :user, optional: true
   belongs_to :bill
@@ -27,16 +28,6 @@ class Command < ApplicationRecord
       created_at: created_at,
       status: status
     }
-  end
-
-  def status
-    self.orders.each do |order|
-      if order.pendente?
-        return "pendente"
-      end
-    end
-
-    "pronto"
   end
 
   def set_bill
