@@ -1,6 +1,12 @@
 module V1
   module Waiters
     class CommandsController < WaiterController
+      def current_commands
+        @commands = Command.current_commands
+
+        render json: @commands
+      end
+
       def create
         @command = Command.new(command_params)
         if @command.save!

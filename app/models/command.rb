@@ -12,6 +12,10 @@ class Command < ApplicationRecord
   after_save :broadcast_to_channel
   before_validation :set_bill, if: Proc.new{ |command| !command.table.nil?}
 
+  def self.current_commands
+    self.where('created_at > ?', 6.hours.ago).order(created_at: :asc)
+  end
+
   def as_json(options = {})
     {
       id: id,
@@ -19,8 +23,20 @@ class Command < ApplicationRecord
       user: user,
       orders: orders.order(status: :asc),
       table_name: bill.table.table_name,
-      bill_id: bill.id
+      bill_id: bill.id,
+      created_at: created_at,
+      status: status
     }
+  end
+
+  def status
+    self.orders.each do |order|
+      if order.pendente?
+        return "pendente"
+      end
+    end
+
+    "pronto"
   end
 
   def set_bill

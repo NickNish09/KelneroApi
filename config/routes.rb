@@ -40,9 +40,11 @@ Rails.application.routes.draw do
 
     namespace :waiters do
       post '/sign_in' => 'sessions#new'
+      post '/token_login' => 'sessions#token_login'
       resources :tables, only: [:index, :show]
       resources :menus, only: [:index]
       resources :commands
+      get '/current_commands' => 'commands#current_commands'
       post '/close_bill' => 'bills#close_bill'
     end
   end

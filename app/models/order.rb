@@ -1,9 +1,10 @@
 class Order < ApplicationRecord
-  enum status: %i[pendente entregue]
+  enum status: %i[pendente pronto]
   belongs_to :item
   belongs_to :command
 
   after_create :update_final_bill
+  after_update :broadcast_command
 
   validates :quantity, presence: true
 
@@ -23,6 +24,10 @@ class Order < ApplicationRecord
       quantity: quantity,
       status: status,
     }
+  end
+
+  def broadcast_command
+    BillsChannel.broadcast_to restaurant, bill: self.command
   end
 
   def update_final_bill

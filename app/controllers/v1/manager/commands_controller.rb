@@ -5,7 +5,7 @@ module V1
 
       # GET /v1/manager/commands
       def index
-        @commands = Command.all
+        @commands = Command.current_commands
 
         render json: @commands
       end
