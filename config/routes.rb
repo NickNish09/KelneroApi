@@ -20,9 +20,10 @@ Rails.application.routes.draw do
         resources :items
         get '/get_itens_by_category/:id' => 'items#get_itens_by_category'
         resources :tables
-        resources :bills
+        resources :commands
         resources :orders
         resources :categories
+        resources :waiters
 
         #statistics routes
         get '/top_selling_items' => 'statistics#top_selling_items'
@@ -35,6 +36,16 @@ Rails.application.routes.draw do
         resources :orders, only: [:index, :create]
         resources :menus, only: [:index]
       end
+    end
+
+    namespace :waiters do
+      post '/sign_in' => 'sessions#new'
+      post '/token_login' => 'sessions#token_login'
+      resources :tables, only: [:index, :show]
+      resources :menus, only: [:index]
+      resources :commands
+      get '/current_commands' => 'commands#current_commands'
+      post '/close_bill' => 'bills#close_bill'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

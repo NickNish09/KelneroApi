@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :restaurants
-  has_many :bills
+  has_many :commands
 
-  def current_bill
-    self.bills.last
+  def current_command
+    self.commands.last
   end
 
   def as_json(options = {})

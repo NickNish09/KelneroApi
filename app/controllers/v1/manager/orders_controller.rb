@@ -29,7 +29,7 @@ module V1
       # PATCH/PUT /v1/manager/orders/1
       def update
         if @order.update(order_params)
-          render json: {order: @order, bill: @order.bill}
+          render json: {order: @order, command: @order.command}
         else
           render json: @order.errors, status: :unprocessable_entity
         end
@@ -52,7 +52,7 @@ module V1
 
       # Only allow a trusted parameter "white list" through.
       def order_params
-        params.require(:order).permit(:item_id, :bill_id, :quantity, :details, :status)
+        params.require(:order).permit(:item_id, :command_id, :quantity, :details, :status)
       end
     end
 

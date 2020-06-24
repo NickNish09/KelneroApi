@@ -14,7 +14,7 @@ require 'rails_helper'
 
 RSpec.describe "/v1/manager/orders", type: :request do
   let(:valid_attributes) {
-    {order: {item_id: create(:item).id, quantity: 5, details: "", bill_id: create(:bill).id}}
+    {order: {item_id: create(:item).id, quantity: 5, details: "", command_id: create(:command).id}}
   }
 
   let(:invalid_attributes) {
@@ -31,7 +31,7 @@ RSpec.describe "/v1/manager/orders", type: :request do
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # BillsController, or in your router and rack
+  # commandsController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
     @user_app = User.find_by(email: "app@admin.com")
@@ -69,7 +69,7 @@ RSpec.describe "/v1/manager/orders", type: :request do
       before do
         headers = valid_headers
         RESTAURANT_ORDERS.times do |i|
-          create(:bill, user: @user)
+          create(:command, user: @user)
         end
         get "http://app.example.com/v1/manager/orders", params: {}, headers: unauthorized_headers
       end
@@ -108,8 +108,8 @@ RSpec.describe "/v1/manager/orders", type: :request do
     context "with invalid params" do
       before do
         headers = valid_headers
-        @bill = create(:bill, user: @user)
-        @bill_orders = @bill.items.count
+        @command = create(:command, user: @user)
+        @command_orders = @command.items.count
         post "http://app.example.com/v1/manager/orders/", params: invalid_attributes, headers: headers
       end
 
@@ -119,18 +119,18 @@ RSpec.describe "/v1/manager/orders", type: :request do
 
       it 'should return an error message' do
         expect(JSON.parse(response.body)['item'][0]).to eq('é obrigatório(a)')
-        expect(JSON.parse(response.body)['bill'][0]).to eq('é obrigatório(a)')
+        expect(JSON.parse(response.body)['command'][0]).to eq('é obrigatório(a)')
       end
 
       it 'should not create an item in the DB' do
-        expect(@bill.items.count).to eq @bill_orders
+        expect(@command.items.count).to eq @command_orders
       end
     end
 
     context "with no user authentitication" do
       before do
         headers = valid_headers
-        @bill = create(:bill, user: @user)
+        @command = create(:command, user: @user)
         post "http://app.example.com/v1/manager/orders/", params: valid_attributes, headers: unauthorized_headers
       end
 

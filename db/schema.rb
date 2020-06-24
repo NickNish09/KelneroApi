@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_174004) do
+ActiveRecord::Schema.define(version: 2020_06_23_165127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,25 +36,12 @@ ActiveRecord::Schema.define(version: 2020_06_04_174004) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "bill_items", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "bill_id", null: false
-    t.integer "quantity"
-    t.text "details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["bill_id"], name: "index_bill_items_on_bill_id"
-    t.index ["item_id"], name: "index_bill_items_on_item_id"
-  end
-
   create_table "bills", force: :cascade do |t|
-    t.float "final_bill"
+    t.datetime "closed_in"
     t.bigint "table_id"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["table_id"], name: "index_bills_on_table_id"
-    t.index ["user_id"], name: "index_bills_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -62,6 +49,19 @@ ActiveRecord::Schema.define(version: 2020_06_04_174004) do
     t.boolean "main", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "commands", force: :cascade do |t|
+    t.float "final_bill", default: 0.0
+    t.bigint "table_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "bill_id"
+    t.integer "status", default: 0
+    t.index ["bill_id"], name: "index_commands_on_bill_id"
+    t.index ["table_id"], name: "index_commands_on_table_id"
+    t.index ["user_id"], name: "index_commands_on_user_id"
   end
 
   create_table "item_categories", force: :cascade do |t|
@@ -85,13 +85,13 @@ ActiveRecord::Schema.define(version: 2020_06_04_174004) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "item_id", null: false
-    t.bigint "bill_id", null: false
+    t.bigint "command_id", null: false
     t.integer "quantity"
     t.text "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
-    t.index ["bill_id"], name: "index_orders_on_bill_id"
+    t.index ["command_id"], name: "index_orders_on_command_id"
     t.index ["item_id"], name: "index_orders_on_item_id"
   end
 
@@ -149,13 +149,24 @@ ActiveRecord::Schema.define(version: 2020_06_04_174004) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "waiters", force: :cascade do |t|
+    t.string "name"
+    t.string "auth_code"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "restaurant_id"
+    t.index ["restaurant_id"], name: "index_waiters_on_restaurant_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bill_items", "bills"
-  add_foreign_key "bill_items", "items"
   add_foreign_key "bills", "tables"
+  add_foreign_key "commands", "bills"
+  add_foreign_key "commands", "tables"
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
-  add_foreign_key "orders", "bills"
+  add_foreign_key "orders", "commands"
   add_foreign_key "orders", "items"
   add_foreign_key "restaurants", "users"
+  add_foreign_key "waiters", "restaurants"
 end

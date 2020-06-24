@@ -1,29 +1,22 @@
 class Bill < ApplicationRecord
-  belongs_to :table, optional: true
-  belongs_to :user, optional: true
+  belongs_to :table
+  has_many :commands
 
-  has_many :orders
-  has_many :items, through: :orders
-
-  validates :final_bill, presence: true
-
-  after_save :broadcast_to_channel
-
-  def as_json(options = {})
-    {
-      id: id,
-      final_bill: final_bill,
-      user: user,
-      orders: orders.order(status: :asc),
-    }
+  def is_closed?
+    !self.closed_in.nil?
   end
 
-  def broadcast_to_channel
-    BillsChannel.broadcast_to restaurant, bill: self
+  def total_orders
+     total = []
+     commands.each do |command|
+       total.concat(command.orders)
+     end
+
+     total
   end
 
-  def restaurant
-    Restaurant.find_by(subdomain: Apartment::Tenant.current)
+  def close_bill
+    self.closed_in = DateTime.now
+    self.save
   end
-
 end

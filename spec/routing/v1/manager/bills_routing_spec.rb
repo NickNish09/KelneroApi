@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe V1::Manager::BillsController, type: :routing do
+RSpec.describe V1::Manager::CommandsController, type: :routing do
   # describe "routing" do
   #   it "routes to #index" do
   #     expect(get: "/v1/manager/bills").to route_to("v1/manager/bills#index")

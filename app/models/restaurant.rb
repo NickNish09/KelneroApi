@@ -1,6 +1,8 @@
 class Restaurant < ApplicationRecord
   include Rails.application.routes.url_helpers
   belongs_to :user
+  has_many :waiters
+
   after_create :create_tenant
 
   has_one_attached :logo
