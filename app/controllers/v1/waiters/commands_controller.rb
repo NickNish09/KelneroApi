@@ -16,10 +16,19 @@ module V1
         end
       end
 
+      def update
+        @command = Command.find params[:id]
+        if @command.update(command_params)
+          render json: @command, status: :created, location: [:v1, :manager, @command]
+        else
+          render json: @command.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def command_params
-        params.require(:command).permit(:table_id, :user_id, :bill_id,
+        params.require(:command).permit(:table_id, :status, :user_id, :bill_id,
                                         :final_bill,
                                         orders_attributes: [:item_id, :quantity, :details])
       end

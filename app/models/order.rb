@@ -43,8 +43,6 @@ class Order < ApplicationRecord
         self.command.save
       end
     end
-
-    broadcast_command
   end
 
   def update_final_bill

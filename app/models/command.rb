@@ -14,7 +14,7 @@ class Command < ApplicationRecord
   before_validation :set_bill, if: Proc.new{ |command| !command.table.nil?}
 
   def self.current_commands
-    self.where('created_at > ?', 6.hours.ago).order(created_at: :asc)
+    self.joins(:bill).where('bills.closed_in IS NULL').where('commands.created_at > ?', 6.hours.ago).order(status: :asc).order(created_at: :asc)
   end
 
   def as_json(options = {})
@@ -23,11 +23,20 @@ class Command < ApplicationRecord
       final_bill: final_bill,
       user: user,
       orders: orders.order(status: :asc),
-      table_name: bill.table.table_name,
+      table_name: table_name,
       bill_id: bill.id,
       created_at: created_at,
-      status: status
+      status: status,
+      table_id: table_id
     }
+  end
+
+  def table_name
+    self.bill.table.table_name
+  end
+
+  def table_id
+    self.bill.table.id
   end
 
   def set_bill
