@@ -37,4 +37,32 @@ RSpec.describe Order, type: :model do
       expect(order_as_json[:item][:name]).to eq @order.item.name
     end
   end
+
+  describe "#check_command_stat" do
+    context "with only pending orders" do
+      before do
+        @command = create(:command, status: "pronto")
+        @order = create(:order, command: @command)
+        @order.status = "pendente"
+        @order.save
+      end
+
+      it 'should update the command stat to pendente' do
+        expect(@command.pendente?).to be_truthy
+      end
+    end
+
+    context "with only done orders" do
+      before do
+        @command = create(:command)
+        @order = create(:order, command: @command)
+        @order.status = "pronto"
+        @order.save
+      end
+
+      it 'should update the command stat to pronto' do
+        expect(@command.pronto?).to be_truthy
+      end
+    end
+  end
 end

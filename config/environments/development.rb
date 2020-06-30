@@ -13,7 +13,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  Rails.application.routes.default_url_options[:host] = '10.0.2.2:3000'
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

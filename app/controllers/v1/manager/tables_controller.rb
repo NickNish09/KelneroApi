@@ -5,7 +5,7 @@ module V1
 
       # GET /v1/manager/tables
       def index
-        @tables = Table.all
+        @tables = Table.all.order(number: :asc)
 
         render json: @tables
       end
