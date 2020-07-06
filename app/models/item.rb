@@ -45,9 +45,12 @@ class Item < ApplicationRecord
   end
 
   def image_url
-    if self.image.attached?
+    if self.global_image
+      if self.global_image.image.attached?
+        rails_blob_url self.global_image.image
+      end
       # rails_blob_path(self.image, only_path: true)
-      rails_blob_url self.image
+      # rails_blob_url self.image
     else
       "https://www.receitadevovo.com.br/gbau/sistema/receitas/img/escondidinho-de-carne-moida_25092018135200.jpg"
       # ""
@@ -61,5 +64,9 @@ class Item < ApplicationRecord
     end
 
     total
+  end
+
+  def global_image
+    GlobalImage.where(subdomain: Apartment::Tenant.current).where(model: "Item").find_by(model_id: self.id)
   end
 end

@@ -26,7 +26,9 @@ module V1
 
         if @item.save
           if params[:item][:image].to_s.length != 0
-            @item.image.attach(io: image_io, filename: params[:item][:filename])
+            # @item.image.attach(io: image_io, filename: params[:item][:filename])
+            @global_image = GlobalImage.create(subdomain: Apartment::Tenant.current, model: "Item", model_id: @item.id)
+            @global_image.image.attach(io: image_io, filename: params[:item][:filename])
           end
           render json: @item, status: :created, location: v1_manager_item_url(@item)
         else
@@ -38,7 +40,14 @@ module V1
       def update
         if @item.update(item_params)
           if params[:item][:image].to_s.length != 0
-            @item.image.attach(io: image_io, filename: params[:item][:filename])
+            # @item.image.attach(io: image_io, filename: params[:item][:filename])
+            @global_image = @item.global_image
+            if @global_image
+              @global_image.image.attach(io: image_io, filename: params[:item][:filename])
+            else
+              @global_image = GlobalImage.create(subdomain: Apartment::Tenant.current, model: "Item", model_id: @item.id)
+              @global_image.image.attach(io: image_io, filename: params[:item][:filename])
+            end
           end
           render json: @item
         else
