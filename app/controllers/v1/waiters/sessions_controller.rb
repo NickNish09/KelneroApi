@@ -5,7 +5,7 @@ module V1
         @waiter = Waiter.find_by(auth_code: params[:auth_code])
 
         if @waiter
-          render json: @waiter.as_json(include: [:restaurant]), status: :ok
+          render json: @waiter.as_json(include: {restaurant: {methods: [:logo_url]}}), status: :ok
         else
           render json: {title: 'Nenhum garçom encontrado', msg: 'Verifique o código e tente novamente'}, status: :unprocessable_entity
         end
@@ -15,7 +15,7 @@ module V1
         @waiter = Waiter.find_by(token: params[:token])
 
         if @waiter
-          render json: @waiter.as_json(include: [:restaurant]), status: :ok
+          render json: @waiter.as_json(include: {restaurant: {methods: [:logo_url]}}), status: :ok
         else
           render json: {title: 'Nenhum garçom encontrado', msg: 'Verifique o código e tente novamente'}, status: :unprocessable_entity
         end
