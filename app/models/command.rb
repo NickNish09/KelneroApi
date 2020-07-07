@@ -27,12 +27,18 @@ class Command < ApplicationRecord
       bill_id: bill.id,
       created_at: created_at,
       status: status,
-      table_id: table_id
+      table_id: table_id,
+      updated_at: updated_at,
+      table_number: table_number,
     }
   end
 
   def table_name
     self.bill.table.table_name
+  end
+
+  def table_number
+    self.bill.table.number
   end
 
   def table_id
