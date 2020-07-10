@@ -11,7 +11,7 @@ class TableSerializer
   attribute :fill
   attribute :table_name
   attribute :final_bill ,&:current_table_bill
-  attribute :bill, &:current_final_bill
+  attribute :bill, &:current_table_bill
   attribute :final_bill_number, &:current_final_bill_number
   attribute :total_bill_items
 end
