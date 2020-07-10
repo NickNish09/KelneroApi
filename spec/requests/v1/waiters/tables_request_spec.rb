@@ -30,10 +30,6 @@ RSpec.describe "/v1/waiter/tables", type: :request do
       expect(JSON.parse(response.body)['data'].length).to eq TABLES_AMOUNT
     end
 
-    it 'should return the total amount of tables' do
-      expect(JSON.parse(response.body)['data'].length).to eq TABLES_AMOUNT
-    end
-
     it 'should return each table necessary stats' do
       attributes_needed = %w(id number x y width height rotation fill table_name bill)
       attributes_not_needed = %w(users final_bill final_bill_number total_bill_items)
@@ -56,6 +52,19 @@ RSpec.describe "/v1/waiter/tables", type: :request do
 
     it "renders a successful response" do
       expect(response).to have_http_status(:ok)
+    end
+
+    it 'should return each table necessary stats' do
+      attributes_needed = %w(id number x y width height rotation fill table_name bill)
+      attributes_not_needed = %w(users final_bill final_bill_number total_bill_items)
+
+      attributes_needed.each do |att|
+        expect(JSON.parse(response.body)['data']['attributes'].key? att).to be_truthy # check if the hash has the specific keys needed
+      end
+
+      attributes_not_needed.each do |att|
+        expect(JSON.parse(response.body)['data']['attributes'].key? att).to be_falsey # don't want useless data to the client side
+      end
     end
   end
 end

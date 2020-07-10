@@ -29,7 +29,7 @@ class Table < ApplicationRecord
   end
 
   def current_table_bill
-    current_bill#.as_json(include: {commands: {include: {orders: {include: [:item]}}, methods: [:status, :table_name]}})
+    current_bill.as_json(include: {commands: {include: {orders: {include: [:item]}}, methods: [:status, :table_name]}})
   end
 
   # função que retorna o total da mesa no momento, de todas as comandas de todos que estão na mesa
