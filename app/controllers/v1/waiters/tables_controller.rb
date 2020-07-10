@@ -12,7 +12,9 @@ module V1
       def show
         @table = Table.find params[:id]
 
-        render json: @table
+        render json: TableSerializer.new(@table, {
+            fields: { table: %i(id number x y width height rotation fill table_name bill) }
+        }).serializable_hash.to_json
       end
     end
   end
