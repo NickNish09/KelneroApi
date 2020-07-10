@@ -4,13 +4,17 @@ module V1
       def index
         @tables = Table.all.order(number: :asc)
 
-        render json: @tables
+        render json: TableSerializer.new(@tables, {
+            fields: { table: %i(id number x y width height rotation fill table_name bill) }
+        }).serializable_hash.to_json
       end
 
       def show
         @table = Table.find params[:id]
 
-        render json: @table
+        render json: TableSerializer.new(@table, {
+            fields: { table: %i(id number x y width height rotation fill table_name bill) }
+        }).serializable_hash.to_json
       end
     end
   end

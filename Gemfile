@@ -38,6 +38,11 @@ gem 'i18n', '~> 1.0'
 # s3 for file storage
 gem "aws-sdk-s3", require: false
 
+# jsonapi-serializer to serialize models for api
+gem 'jsonapi-serializer'
+gem 'jsonapi-rails'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
