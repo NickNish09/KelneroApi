@@ -27,11 +27,11 @@ RSpec.describe "/v1/waiter/tables", type: :request do
     end
 
     it 'should return the total amount of tables' do
-      expect(JSON.parse(response.body).length).to eq TABLES_AMOUNT
+      expect(JSON.parse(response.body)['data'].length).to eq TABLES_AMOUNT
     end
 
     it 'should return the total amount of tables' do
-      expect(JSON.parse(response.body).length).to eq TABLES_AMOUNT
+      expect(JSON.parse(response.body)['data'].length).to eq TABLES_AMOUNT
     end
 
     it 'should return each table necessary stats' do
@@ -39,11 +39,11 @@ RSpec.describe "/v1/waiter/tables", type: :request do
       attributes_not_needed = %w(users final_bill final_bill_number total_bill_items)
 
       attributes_needed.each do |att|
-        expect(JSON.parse(response.body).first.key? att).to be_truthy # check if the hash has the specific keys needed
+        expect(JSON.parse(response.body)['data'].first['attributes'].key? att).to be_truthy # check if the hash has the specific keys needed
       end
 
       attributes_not_needed.each do |att|
-        expect(JSON.parse(response.body).first.key? att).to be_falsey # don't want useless data to the client side
+        expect(JSON.parse(response.body)['data'].first['attributes'].key? att).to be_falsey # don't want useless data to the client side
       end
     end
   end
