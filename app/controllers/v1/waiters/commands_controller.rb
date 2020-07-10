@@ -10,6 +10,7 @@ module V1
       def create
         @command = Command.new(command_params)
         if @command.save!
+          @command.broadcast_to_channel
           render json: @command, status: :created, location: [:v1, :manager, @command]
         else
           render json: @command.errors, status: :unprocessable_entity
@@ -19,6 +20,7 @@ module V1
       def update
         @command = Command.find params[:id]
         if @command.update(command_params)
+          @command.broadcast_to_channel
           render json: @command, status: :created, location: [:v1, :manager, @command]
         else
           render json: @command.errors, status: :unprocessable_entity

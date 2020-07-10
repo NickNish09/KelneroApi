@@ -29,6 +29,7 @@ module V1
       # PATCH/PUT /v1/manager/orders/1
       def update
         if @order.update(order_params)
+          @order.command.broadcast_to_waiter_command_channel
           render json: {order: @order, command: @order.command}
         else
           render json: @order.errors, status: :unprocessable_entity

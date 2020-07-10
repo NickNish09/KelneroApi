@@ -10,7 +10,7 @@ class Command < ApplicationRecord
 
   # validates :final_bill, presence: true
 
-  after_save :broadcast_to_channel
+  # after_save :broadcast_to_channel
   before_validation :set_bill, if: Proc.new{ |command| !command.table.nil?}
 
   def self.current_commands
@@ -56,6 +56,10 @@ class Command < ApplicationRecord
 
   def broadcast_to_channel
     BillsChannel.broadcast_to restaurant, command: self
+  end
+
+  def broadcast_to_waiter_command_channel
+    WaiterCommandsChannel.broadcast_to restaurant, command: self
   end
 
   def restaurant
